@@ -1,0 +1,455 @@
+{
+  "dataProductOwnerDisplayName": "Luigi Baldari",
+  "projectOwner": "user:luigi.baldari_agilelab.it",
+  "projectOwnerDisplayName": "Luigi Baldari",
+  "environment": "development",
+  "domain": "organization",
+  "projectKind": "system",
+  "kind": "dataproduct",
+  "domainId": "urn:dmb:dmn:organization",
+  "id": "urn:dmb:dp:organization:employees_2:0",
+  "description": "Employees variants for HR analytics",
+  "devGroup": "datameshplatform",
+  "ownerGroup": "luigi.baldari_agilelab.it",
+  "dataProductOwner": "user:luigi.baldari_agilelab.it",
+  "email": "luigi.baldari@agilelab.it",
+  "version": "0.17.02",
+  "fullyQualifiedName": "Employees \u2014 variant 2 (A)",
+  "name": "employees_2",
+  "informationSLA": null,
+  "status": "Draft",
+  "maturity": "Intermediate",
+  "useCaseTemplateId": "urn:dmb:utm:dataproduct-template:0.0.0",
+  "infrastructureTemplateId": "urn:dmb:itm:cdp-aws-dataproduct-provisioner:1",
+  "dataProductOwnerDisplayNameAlt": null,
+  "billing": {},
+  "tags": [
+    {
+      "tagFQN": "HR",
+      "source": "Tag",
+      "labelType": "Manual",
+      "state": "Confirmed"
+    },
+    {
+      "tagFQN": "Global",
+      "source": "Tag",
+      "labelType": "Manual",
+      "state": "Confirmed"
+    },
+    {
+      "tagFQN": "Reserved",
+      "source": "Tag",
+      "labelType": "Manual",
+      "state": "Confirmed"
+    }
+  ],
+  "specific": {},
+  "consumable": false,
+  "shoppable": false,
+  "taxonomy": {
+    "id": "urn:dmb:taxonomy:data-mesh-taxonomy",
+    "name": "data-mesh-taxonomy"
+  },
+  "components": [
+    {
+      "kind": "workload",
+      "id": "urn:dmb:cmp:organization:employees_2:0:deletion-workload",
+      "description": "Procedure to delete data according to the right to be forgotten",
+      "name": "Data Deletion Workload",
+      "technology": "DBT",
+      "platform": "Azure",
+      "version": "1.0.0",
+      "infrastructureTemplateId": "urn:dmb:itm:gdpr-tech-adapter:1",
+      "useCaseTemplateId": "urn:dmb:utm:gdpr-workload-template:1",
+      "consumable": false,
+      "shoppable": false,
+      "specific": {},
+      "dependsOn": [],
+      "tags": []
+    },
+    {
+      "kind": "workload",
+      "id": "urn:dmb:cmp:organization:employees_2:0:ingestion",
+      "description": "dbt ingestion workload",
+      "useCaseTemplateId": "urn:dmb:utm:dbt-workload-template:0.0.0",
+      "infrastructureTemplateId": "urn:dmb:itm:workload-provisioner:1",
+      "fullyQualifiedName": null,
+      "name": "Ingestion",
+      "resourceType": "raw",
+      "technology": "dbt",
+      "version": "0.0.0",
+      "processDescription": null,
+      "dependsOn": [],
+      "readsFrom": [],
+      "tags": [],
+      "specific": {}
+    },
+    {
+      "kind": "outputport",
+      "id": "urn:dmb:cmp:organization:employees_2:0:employees_core",
+      "description": "employees_core SQL interface",
+      "name": "Employees Core",
+      "fullyQualifiedName": "employees_core",
+      "version": "0.0.0",
+      "infrastructureTemplateId": "urn:dmb:itm:aws-dremio-provisioner:1",
+      "useCaseTemplateId": "urn:dmb:utm:aws-dremio-template:0.0.0",
+      "dependsOn": [],
+      "platform": "Dremio Cloud",
+      "technology": "Dremio Cloud",
+      "outputPortType": "SQL",
+      "processDescription": "SQL model exposing employees_core",
+      "dataContract": {
+        "schema": [
+          {
+            "name": "employeeId",
+            "dataType": "string",
+            "description": "Global employee identifier",
+            "constraint": "PRIMARY_KEY",
+            "tags": [
+              {
+                "tagFQN": "GlobalAddressableIdentifier",
+                "source": "Tag",
+                "labelType": "Manual",
+                "state": "Confirmed"
+              }
+            ]
+          },
+          {
+            "name": "first_name",
+            "dataType": "string",
+            "description": "Employee first name",
+            "constraint": "NOT_NULL",
+            "tags": [
+              {
+                "tagFQN": "PII",
+                "source": "Tag",
+                "labelType": "Manual",
+                "state": "Confirmed"
+              }
+            ]
+          },
+          {
+            "name": "last_name",
+            "dataType": "string",
+            "description": "Employee last name",
+            "constraint": "NOT_NULL",
+            "tags": [
+              {
+                "tagFQN": "PII",
+                "source": "Tag",
+                "labelType": "Manual",
+                "state": "Confirmed"
+              }
+            ]
+          },
+          {
+            "name": "birthdate",
+            "dataType": "date",
+            "description": "Employee date of birth",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "gender",
+            "dataType": "string",
+            "description": "Employee gender",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "residential_address",
+            "dataType": "struct",
+            "description": "Residential address",
+            "constraint": "NOT_NULL",
+            "tags": [
+              {
+                "tagFQN": "PII",
+                "source": "Tag",
+                "labelType": "Manual",
+                "state": "Confirmed"
+              }
+            ]
+          },
+          {
+            "name": "first_hire_date",
+            "dataType": "date",
+            "description": "Date of first hire",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "last_working_date",
+            "dataType": "date",
+            "description": "Last working day"
+          },
+          {
+            "name": "last_update",
+            "dataType": "date",
+            "description": "Last record update date"
+          }
+        ],
+        "termsAndConditions": "Usable for production analytics",
+        "endpoint": null,
+        "SLA": {
+          "intervalOfChange": "Daily",
+          "timeliness": "1 day",
+          "upTime": "99.9%"
+        }
+      },
+      "dataSharingAgreements": {
+        "purpose": "HR analytics and reporting",
+        "billing": null,
+        "security": "PII may be masked by policy",
+        "intendedUsage": "KPI and exploration",
+        "limitations": "adhere to internal privacy guidelines",
+        "lifeCycle": "history retained for 10 years",
+        "confidentiality": null
+      },
+      "tags": [],
+      "sampleData": null,
+      "semanticLinking": [],
+      "specific": {
+        "sql": "select * from hr.employees_core",
+        "dependsOn": [],
+        "reflectionDefinitions": [],
+        "supportVds": [],
+        "supportPds": [],
+        "format": "Delta"
+      },
+      "consumable": true,
+      "shoppable": true
+    },
+    {
+      "kind": "outputport",
+      "id": "urn:dmb:cmp:organization:employees_2:0:employees_skills",
+      "description": "employees_skills SQL interface",
+      "name": "Employees Skills",
+      "fullyQualifiedName": "employees_skills",
+      "version": "0.0.0",
+      "infrastructureTemplateId": "urn:dmb:itm:aws-dremio-provisioner:1",
+      "useCaseTemplateId": "urn:dmb:utm:aws-dremio-template:0.0.0",
+      "dependsOn": [],
+      "platform": "Dremio Cloud",
+      "technology": "Dremio Cloud",
+      "outputPortType": "SQL",
+      "processDescription": "SQL model exposing employees_skills",
+      "dataContract": {
+        "schema": [
+          {
+            "name": "employeeId",
+            "dataType": "string",
+            "description": "Employee identifier",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "skillId",
+            "dataType": "string",
+            "description": "Skill identifier",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "skill_name",
+            "dataType": "string",
+            "description": "Skill name",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "skill_description",
+            "dataType": "string",
+            "description": "Skill description",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "skill_acquisition_date",
+            "dataType": "date",
+            "description": "Date when the skill was acquired",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "last_update",
+            "dataType": "date",
+            "description": "Last record update date"
+          }
+        ],
+        "termsAndConditions": "Usable for production analytics",
+        "endpoint": null,
+        "SLA": {
+          "intervalOfChange": "Daily",
+          "timeliness": "1 day",
+          "upTime": "99.5%"
+        }
+      },
+      "dataSharingAgreements": {
+        "purpose": "HR analytics and reporting",
+        "billing": null,
+        "security": "PII may be masked by policy",
+        "intendedUsage": "KPI and exploration",
+        "limitations": "adhere to internal privacy guidelines",
+        "lifeCycle": "history retained for 10 years",
+        "confidentiality": null
+      },
+      "tags": [],
+      "sampleData": null,
+      "semanticLinking": [],
+      "specific": {
+        "sql": "select * from hr.employees_skills",
+        "dependsOn": [],
+        "reflectionDefinitions": [],
+        "supportVds": [],
+        "supportPds": [],
+        "format": "Iceberg"
+      },
+      "consumable": true,
+      "shoppable": true
+    },
+    {
+      "kind": "outputport",
+      "id": "urn:dmb:cmp:organization:employees_2:0:employees_events",
+      "description": "employees_events topic for streaming employee events",
+      "name": "Employees Events",
+      "platform": "Kafka",
+      "technology": "Kafka",
+      "outputPortType": "KAFKA",
+      "dataContract": {
+        "schema": [
+          {
+            "name": "event_id",
+            "dataType": "string",
+            "description": "Unique event identifier",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "employeeId",
+            "dataType": "string",
+            "description": "Employee identifier referenced by the event",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "event_type",
+            "dataType": "string",
+            "description": "Event type (HIRED|PROMOTED|TERMINATED|MOVED)",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "event_time",
+            "dataType": "timestamp",
+            "description": "When the event occurred",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "producer",
+            "dataType": "string",
+            "description": "Event producer system id"
+          }
+        ],
+        "SLA": {
+          "intervalOfChange": "real-time",
+          "timeliness": "5 minutes",
+          "upTime": "99%"
+        },
+        "endpoint": "kafka://cluster/employees_events"
+      },
+      "specific": {
+        "topic": "dp.organization.employees.v2.employees_events",
+        "partitions": 8,
+        "retentionDays": 19
+      },
+      "consumable": true,
+      "shoppable": false
+    },
+    {
+      "kind": "workload",
+      "id": "urn:dmb:cmp:organization:employees_2:0:dq",
+      "description": "Data Quality Process (Great Expectations)",
+      "useCaseTemplateId": "urn:dmb:utm:dq-standard:0.0.0",
+      "infrastructureTemplateId": "urn:dmb:itm:workload-provisioner:1",
+      "fullyQualifiedName": null,
+      "name": "DQ",
+      "resourceType": "raw",
+      "technology": null,
+      "version": "0.0.0",
+      "processDescription": null,
+      "dependsOn": [],
+      "readsFrom": [],
+      "tags": [],
+      "specific": {
+        "outputports": [
+          {
+            "outputPortId": "urn:dmb:cmp:organization:employees_2:0:employees_core",
+            "expectations": [
+              {
+                "expectation_type": "expect_table_columns_to_match_ordered_list",
+                "kwargs": {
+                  "column_list": [
+                    "employeeId",
+                    "first_name",
+                    "last_name"
+                  ]
+                }
+              },
+              {
+                "expectation_type": "expect_column_values_to_match_regex",
+                "kwargs": {
+                  "column": "first_name",
+                  "regex": "^[A-Za-z\\-\\s]+$"
+                }
+              },
+              {
+                "expectation_type": "expect_column_values_to_not_be_null",
+                "kwargs": {
+                  "column": "employeeId",
+                  "mostly": 1
+                }
+              }
+            ]
+          },
+          {
+            "outputPortId": "urn:dmb:cmp:organization:employees_2:0:employees_events",
+            "expectations": [
+              {
+                "expectation_type": "expect_table_columns_to_match_ordered_list",
+                "kwargs": {
+                  "column_list": [
+                    "employeeId",
+                    "first_name",
+                    "last_name"
+                  ]
+                }
+              },
+              {
+                "expectation_type": "expect_column_values_to_match_regex",
+                "kwargs": {
+                  "column": "first_name",
+                  "regex": "^[A-Za-z\\-\\s]+$"
+                }
+              },
+              {
+                "expectation_type": "expect_column_values_to_not_be_null",
+                "kwargs": {
+                  "column": "employeeId",
+                  "mostly": 1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "consumable": false,
+      "shoppable": false
+    },
+    {
+      "kind": "workload",
+      "id": "urn:dmb:cmp:organization:employees_2:0:pii-sidecar",
+      "description": "PII sidecar",
+      "useCaseTemplateId": "urn:dmb:utm:PII-AutoDetect:0.0.0",
+      "infrastructureTemplateId": "urn:dmb:itm:workload-provisioner:1",
+      "fullyQualifiedName": null,
+      "name": "PII Sidecar",
+      "resourceType": "raw",
+      "technology": "",
+      "version": "0.0.0",
+      "processDescription": null,
+      "dependsOn": [],
+      "readsFrom": [],
+      "tags": [],
+      "specific": {}
+    }
+  ]
+}

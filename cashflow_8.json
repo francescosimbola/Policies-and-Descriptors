@@ -1,0 +1,235 @@
+{
+  "id": "urn:dmb:dp:finance:cashflow_8:0",
+  "name": "cashflow_8",
+  "version": "0.3.8",
+  "fullyQualifiedName": "Liquidity Cash Flows v3 \u2014 8",
+  "domain": "finance/liquidity",
+  "tags": [
+    "finance",
+    "gdpr",
+    "restricted"
+  ],
+  "orchestration": {
+    "tool": "Prefect",
+    "details": {
+      "flows": [
+        "cashflow_build"
+      ]
+    }
+  },
+  "qualityControls": {
+    "framework": "GreatExpectations",
+    "controls": [
+      {
+        "expectation": "expect_column_values_to_not_be_null",
+        "columns": [
+          "ID"
+        ]
+      },
+      {
+        "expectation": "expect_column_values_to_be_between",
+        "column": "Amount",
+        "min": 0
+      },
+      {
+        "expectation": "expect_column_values_to_be_in_set",
+        "column": "Direction",
+        "set": [
+          "IN",
+          "OUT"
+        ]
+      }
+    ]
+  },
+  "workloads": [
+    {
+      "name": "purge_personal_data",
+      "type": "lambda",
+      "description": "Implements right to be forgotten by purging matching records."
+    }
+  ],
+  "metadata": {
+    "owner": {
+      "team": "Treasury IT",
+      "contact": "treasury-engineering@example.org"
+    },
+    "costCenter": "FIN-LQD",
+    "classification": "internal",
+    "description": "Data product delivering cash movement facts; non-sensitive aggregates only."
+  },
+  "observability": {
+    "metrics": [
+      "row_count",
+      "null_rate",
+      "latency"
+    ],
+    "logging": {
+      "level": "INFO",
+      "retentionDays": 14
+    }
+  },
+  "lineage": {
+    "upstreamSources": [
+      {
+        "system": "ERP",
+        "object": "GL_Bookings"
+      },
+      {
+        "system": "BankAPI",
+        "object": "Movements"
+      }
+    ]
+  },
+  "dataContracts": [
+    {
+      "id": "urn:dmb:dp:finance:cashflow_8:0:snowflaketable_output",
+      "type": "SnowflakeTable",
+      "schema": [
+        {
+          "name": "ID",
+          "dataType": "STRING",
+          "description": "Unique internal identifier for a cash flow row."
+        },
+        {
+          "name": "Amount",
+          "dataType": "DECIMAL(18,2)",
+          "description": "Monetary movement in EUR; non-negative."
+        },
+        {
+          "name": "Direction",
+          "dataType": "STRING",
+          "description": "IN for incoming cash, OUT for outgoing cash."
+        },
+        {
+          "name": "BookingDate",
+          "dataType": "DATE",
+          "description": "Ledger posting date."
+        }
+      ],
+      "columnTags": {
+        "Direction": {
+          "businessTerms": [
+            "LiquidityStage",
+            "AccountingPeriod"
+          ]
+        }
+      },
+      "sla": {
+        "intervalOfChange": "PT8H",
+        "timeliness": "PT20M",
+        "upTime": 0.982
+      }
+    },
+    {
+      "id": "urn:dmb:dp:finance:cashflow_8:0:kafka_output",
+      "type": "KafkaTopic",
+      "topic": "liquidity.cashflow.variant.8",
+      "partitions": 4,
+      "retentionDays": 13,
+      "schema": [
+        {
+          "name": "ID",
+          "dataType": "STRING"
+        },
+        {
+          "name": "Amount",
+          "dataType": "DOUBLE"
+        },
+        {
+          "name": "Direction",
+          "dataType": "STRING"
+        },
+        {
+          "name": "EventTime",
+          "dataType": "TIMESTAMP"
+        }
+      ],
+      "columnTags": {
+        "Direction": {
+          "businessTerms": [
+            "AccountingPeriod",
+            "CounterpartyCategory",
+            "CashMovementType"
+          ]
+        }
+      }
+    },
+    {
+      "id": "urn:dmb:dp:finance:cashflow_8:0:bigquerytable_aux",
+      "type": "BigQueryTable",
+      "schema": [
+        {
+          "name": "ID",
+          "dataType": "STRING",
+          "description": "Primary event identifier."
+        },
+        {
+          "name": "Amount",
+          "dataType": "NUMERIC",
+          "description": "Amount in EUR, zero or positive."
+        },
+        {
+          "name": "Direction",
+          "dataType": "STRING",
+          "description": "Direction of cash flow."
+        },
+        {
+          "name": "BookingDate",
+          "dataType": "DATE",
+          "description": "Accounting date."
+        },
+        {
+          "name": "EventTime",
+          "dataType": "TIMESTAMP",
+          "description": "Event timestamp."
+        }
+      ],
+      "sla": {
+        "intervalOfChange": "P2D",
+        "timeliness": "PT20M",
+        "upTime": 0.985
+      }
+    },
+    {
+      "id": "urn:dmb:dp:finance:cashflow_8:0:deltatable_aux",
+      "type": "DeltaTable",
+      "schema": [
+        {
+          "name": "ID",
+          "dataType": "STRING",
+          "description": "Primary event identifier."
+        },
+        {
+          "name": "Amount",
+          "dataType": "NUMERIC",
+          "description": "Amount in EUR, zero or positive."
+        },
+        {
+          "name": "Direction",
+          "dataType": "STRING",
+          "description": "Direction of cash flow."
+        },
+        {
+          "name": "BookingDate",
+          "dataType": "DATE",
+          "description": "Accounting date."
+        },
+        {
+          "name": "EventTime",
+          "dataType": "TIMESTAMP",
+          "description": "Event timestamp."
+        }
+      ],
+      "sla": {
+        "intervalOfChange": "P2D",
+        "timeliness": "PT20M",
+        "upTime": 0.985
+      }
+    }
+  ],
+  "notes": [
+    "Variant 8: topic=liquidity.cashflow.variant.8, partitions=4, retention=13d.",
+    "Descriptions in streaming schema are intentionally absent to test contract completeness checks.",
+    "No PII is modeled; GDPR tag remains at product level only."
+  ]
+}

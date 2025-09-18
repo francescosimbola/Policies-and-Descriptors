@@ -1,0 +1,288 @@
+{
+  "dataProductOwnerDisplayName": "Paolo Platter",
+  "projectOwner": "user:paolo.platter_agilelab.it",
+  "projectOwnerDisplayName": "Paolo Platter",
+  "environment": "development",
+  "domain": "customertouchpoint",
+  "projectKind": "system",
+  "kind": "dataproduct",
+  "domainId": "urn:dmb:dmn:customertouchpoint",
+  "id": "urn:dmb:dp:customertouchpoint:ecommerce_3:0",
+  "description": "variants of the ecommerce operations data product",
+  "devGroup": "datameshplatform",
+  "ownerGroup": "paolo.platter_agilelab.it",
+  "dataProductOwner": "user:paolo.platter_agilelab.it",
+  "email": "paolo.platter@agilelab.it",
+  "version": "0.6.0",
+  "fullyQualifiedName": "Ecommerce \u2014 variant 3 (B)",
+  "name": "ecommerce_3",
+  "informationSLA": "2BD",
+  "maturity": "Intermediate",
+  "useCaseTemplateId": "urn:dmb:utm:dataproduct-template:0.0.0",
+  "infrastructureTemplateId": "urn:dmb:itm:cdp-aws-dataproduct-provisioner:1",
+  "billing": {},
+  "tags": [
+    "GDPR"
+  ],
+  "specific": {},
+  "consumable": false,
+  "shoppable": false,
+  "taxonomy": {
+    "id": "urn:dmb:taxonomy:data-mesh-taxonomy",
+    "name": "data-mesh-taxonomy"
+  },
+  "components": [
+    {
+      "kind": "workload",
+      "id": "urn:dmb:cmp:customertouchpoint:ecommerce_3:0:deletion-workload",
+      "description": "Procedure to delete data according to the right to be forgotten",
+      "name": "Data Deletion Workload",
+      "technology": "stepFunctions",
+      "platform": "Azure",
+      "version": "1.0.0",
+      "infrastructureTemplateId": "urn:dmb:itm:gdpr-tech-adapter:1",
+      "useCaseTemplateId": "urn:dmb:utm:gdpr-workload-template:1",
+      "consumable": false,
+      "shoppable": false,
+      "specific": {},
+      "dependsOn": [],
+      "tags": []
+    },
+    {
+      "kind": "workload",
+      "id": "urn:dmb:cmp:customertouchpoint:ecommerce_3:0:pipeline",
+      "description": "ETL/ELT pipeline for ecommerce data",
+      "name": "Pipeline",
+      "technology": "stepFunctions",
+      "platform": "AWS S3",
+      "version": "0.0.0",
+      "dependsOn": [],
+      "readsFrom": [],
+      "tags": [],
+      "specific": {},
+      "consumable": false,
+      "shoppable": false
+    },
+    {
+      "kind": "outputport",
+      "id": "urn:dmb:cmp:customertouchpoint:ecommerce_3:0:orders",
+      "description": "Ecommerce orders interface",
+      "name": "Orders",
+      "fullyQualifiedName": "Orders",
+      "version": "0.0.0",
+      "infrastructureTemplateId": "urn:dmb:itm:aws-dremio-provisioner:1",
+      "useCaseTemplateId": "urn:dmb:utm:aws-dremio-template:0.0.0",
+      "dependsOn": [],
+      "platform": "AWS S3",
+      "technology": "AWS S3",
+      "outputPortType": "SQL",
+      "processDescription": "SQL model producing orders for downstream consumption",
+      "dataContract": {
+        "schema": [
+          {
+            "name": "order_id",
+            "dataType": "string",
+            "description": "Unique order identifier",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "customer_ref",
+            "dataType": "string",
+            "description": "Opaque customer reference (non-PII)",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "order_ts",
+            "dataType": "timestamp",
+            "description": "Timestamp when the order was executed",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "status",
+            "dataType": "string",
+            "description": "Order lifecycle status"
+          },
+          {
+            "name": "store_region",
+            "dataType": "string",
+            "description": "Store region code"
+          },
+          {
+            "name": "currency",
+            "dataType": "string",
+            "description": "ISO 4217 currency code"
+          },
+          {
+            "name": "gross_amount",
+            "dataType": "number",
+            "description": "Total gross order amount"
+          },
+          {
+            "name": "net_amount",
+            "dataType": "number",
+            "description": "Total net order amount after discounts"
+          }
+        ],
+        "termsAndConditions": "It can be used for production purposes",
+        "endpoint": null,
+        "SLA": {
+          "intervalOfChange": "12h",
+          "timeliness": "1BD",
+          "upTime": "99%"
+        }
+      },
+      "dataSharingAgreements": {
+        "purpose": "operational analytics and reporting",
+        "billing": null,
+        "security": null,
+        "intendedUsage": "shop performance analysis and reconciliation",
+        "limitations": "no sensitive data included",
+        "lifeCycle": "history retained for 12 months",
+        "confidentiality": null
+      },
+      "tags": [],
+      "sampleData": null,
+      "semanticLinking": [],
+      "specific": {
+        "sql": "select * from shop.orders",
+        "dependsOn": [],
+        "reflectionDefinitions": [],
+        "supportVds": [],
+        "supportPds": [],
+        "format": "Iceberg"
+      },
+      "consumable": true,
+      "shoppable": true
+    },
+    {
+      "kind": "outputport",
+      "id": "urn:dmb:cmp:customertouchpoint:ecommerce_3:0:payments",
+      "description": "Ecommerce payments interface",
+      "name": "Payments",
+      "fullyQualifiedName": "Payments",
+      "version": "0.0.0",
+      "infrastructureTemplateId": "urn:dmb:itm:aws-dremio-provisioner:1",
+      "useCaseTemplateId": "urn:dmb:utm:aws-dremio-template:0.0.0",
+      "dependsOn": [],
+      "platform": "AWS S3",
+      "technology": "AWS S3",
+      "outputPortType": "SQL",
+      "processDescription": "SQL model producing payments for downstream consumption",
+      "dataContract": {
+        "schema": [
+          {
+            "name": "payment_id",
+            "dataType": "string",
+            "description": "Unique payment identifier",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "order_id",
+            "dataType": "string",
+            "description": "Associated order identifier",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "method",
+            "dataType": "string",
+            "description": "Payment method (card|paypal|bank|coupon)",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "amount",
+            "dataType": "number",
+            "description": "Payment amount in the order currency"
+          },
+          {
+            "name": "captured_ts",
+            "dataType": "timestamp",
+            "description": "Timestamp when payment was captured"
+          },
+          {
+            "name": "provider_code",
+            "dataType": "string",
+            "description": "Payment provider opaque code"
+          }
+        ],
+        "termsAndConditions": "It can be used for production purposes",
+        "endpoint": null,
+        "SLA": {
+          "intervalOfChange": "1BD",
+          "timeliness": "1BD",
+          "upTime": "99%"
+        }
+      },
+      "dataSharingAgreements": {
+        "purpose": "operational analytics and reporting",
+        "billing": null,
+        "security": null,
+        "intendedUsage": "shop performance analysis and reconciliation",
+        "limitations": "no sensitive data included",
+        "lifeCycle": "history retained for 12 months",
+        "confidentiality": null
+      },
+      "tags": [],
+      "sampleData": null,
+      "semanticLinking": [],
+      "specific": {
+        "sql": "select * from shop.payments",
+        "dependsOn": [],
+        "reflectionDefinitions": [],
+        "supportVds": [],
+        "supportPds": [],
+        "format": "Parquet"
+      },
+      "consumable": true,
+      "shoppable": true
+    },
+    {
+      "kind": "outputport",
+      "id": "urn:dmb:cmp:customertouchpoint:ecommerce_3:0:lake-iceberg",
+      "description": "Curated dataset stored in data lake",
+      "name": "Lake Iceberg",
+      "platform": "DataLake",
+      "technology": "ICEBERG",
+      "outputPortType": "OBJECT_STORAGE",
+      "dataContract": {
+        "schema": [
+          {
+            "name": "record_id",
+            "dataType": "string",
+            "description": "Synthetic record identifier",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "order_id",
+            "dataType": "string",
+            "description": "Order identifier",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "partition_date",
+            "dataType": "date",
+            "description": "Date partition for storage layout",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "status",
+            "dataType": "string",
+            "description": "Order status at snapshot"
+          },
+          {
+            "name": "amount",
+            "dataType": "number",
+            "description": "Order monetary amount at snapshot"
+          }
+        ],
+        "SLA": {
+          "intervalOfChange": "2BD",
+          "timeliness": "1h",
+          "upTime": "99%"
+        },
+        "endpoint": "s3://ecommerce/iceberg/v3/"
+      },
+      "consumable": true,
+      "shoppable": false
+    }
+  ]
+}
