@@ -1,0 +1,432 @@
+{
+  "dataProductOwnerDisplayName": "Paolo Platter",
+  "projectOwner": "user:paolo.platter_agilelab.it",
+  "projectOwnerDisplayName": "Paolo Platter",
+  "environment": "staging",
+  "domain": "finance-risk",
+  "projectKind": "system",
+  "kind": "dataproduct",
+  "domainId": "urn:dmb:dmn:financerisk",
+  "id": "urn:dmb:dp:finance-risk:customer-risk_6:0",
+  "description": "variants of the customer risk traits data product",
+  "devGroup": "bigdata",
+  "ownerGroup": "paolo.platter_agilelab.it",
+  "dataProductOwner": "user:paolo.platter_agilelab.it",
+  "email": "paolo.platter@agilelab.it",
+  "version": "0.3.0",
+  "fullyQualifiedName": "Customer Risk \u2014 variant 6 (C)",
+  "name": "customer_risk_6",
+  "informationSLA": null,
+  "maturity": "Intermediate",
+  "useCaseTemplateId": "urn:dmb:utm:dataproduct-template:0.0.0",
+  "infrastructureTemplateId": "urn:dmb:itm:dataproduct-provisioner:1",
+  "billing": {},
+  "tags": [
+    {
+      "tagFQN": "GDPR",
+      "source": "Tag",
+      "labelType": "Manual",
+      "state": "Confirmed"
+    }
+  ],
+  "specific": {},
+  "business_attributes": {
+    "valueProposition": "Keep Risk under control for each customer",
+    "okr": "Decrease by 1% the overall RWA",
+    "pricingType": "Subscription",
+    "stakeholderRoles": [
+      "CFO",
+      "RiskManager"
+    ]
+  },
+  "security_attributes": {
+    "visibility": "Company",
+    "confidentiality": "Confidential",
+    "gdpr": "Yes"
+  },
+  "consumable": false,
+  "shoppable": false,
+  "taxonomy": {
+    "id": "urn:dmb:taxonomy:data-mesh-taxonomy",
+    "name": "data-mesh-taxonomy"
+  },
+  "components": [
+    {
+      "kind": "workload",
+      "id": "urn:dmb:cmp:finance-risk:customer-risk_6:0:deletion-workload",
+      "description": "Procedure to delete data according to the right to be forgotten",
+      "name": "Data Deletion Workload",
+      "technology": "DBT",
+      "platform": "Azure",
+      "version": "1.0.0",
+      "infrastructureTemplateId": "urn:dmb:itm:gdpr-tech-adapter:1",
+      "useCaseTemplateId": "urn:dmb:utm:gdpr-workload-template:1",
+      "consumable": false,
+      "shoppable": false,
+      "specific": {},
+      "dependsOn": [],
+      "tags": []
+    },
+    {
+      "kind": "workload",
+      "id": "urn:dmb:cmp:finance-risk:customer-risk_6:0:reconciliation-workload",
+      "description": "Reconcile risk outputs vs source metrics",
+      "name": "Risk Model Reconciliation",
+      "technology": "Flink",
+      "platform": "EMR",
+      "version": "0.2.0",
+      "infrastructureTemplateId": "urn:dmb:itm:generic-batch:1",
+      "useCaseTemplateId": "urn:dmb:utm:batch-template:1",
+      "consumable": false,
+      "shoppable": false,
+      "specific": {},
+      "dependsOn": [],
+      "tags": []
+    },
+    {
+      "kind": "outputport",
+      "id": "urn:dmb:cmp:finance-risk:customer-risk_6:0:customer-features",
+      "description": "Customer characteristics",
+      "name": "Customer Features",
+      "fullyQualifiedName": null,
+      "version": "0.0.0",
+      "infrastructureTemplateId": "urn:dmb:itm:aws-dremio-provisioner:1",
+      "useCaseTemplateId": "urn:dmb:utm:aws-dremio-template:0.0.0",
+      "dependsOn": [],
+      "platform": "PostgreSQL",
+      "technology": "PostgreSQL",
+      "outputPortType": "SQL",
+      "creationDate": null,
+      "startDate": null,
+      "processDescription": null,
+      "dataContract": {
+        "schema": [
+          {
+            "name": "Customer_Key",
+            "dataType": "string",
+            "constraint": "PRIMARY_KEY",
+            "tags": [
+              {
+                "tagFQN": "GlobalAddressableIdentifier",
+                "labelType": "Manual",
+                "source": "Tag",
+                "state": "Confirmed"
+              }
+            ],
+            "description": "global addressable identifier for a customer."
+          },
+          {
+            "name": "First_Name",
+            "dataType": "string",
+            "constraint": "NOT_NULL",
+            "tags": [
+              {
+                "tagFQN": "PII",
+                "source": "Tag",
+                "labelType": "Manual",
+                "state": "Confirmed"
+              }
+            ],
+            "masking": {
+              "generatorType": "Name",
+              "specific": {
+                "part": "FirstName"
+              }
+            },
+            "description": "customer's first name"
+          },
+          {
+            "name": "Last_Name",
+            "dataType": "string",
+            "constraint": "NOT_NULL",
+            "tags": [
+              {
+                "tagFQN": "PII",
+                "source": "Tag",
+                "labelType": "Manual",
+                "state": "Confirmed"
+              }
+            ],
+            "masking": {
+              "generatorType": "Name",
+              "specific": {
+                "part": "LastName"
+              }
+            },
+            "description": "customer's last name"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "constraint": "NOT_NULL",
+            "tags": [
+              {
+                "tagFQN": "Sensitive",
+                "source": "Tag",
+                "labelType": "Manual",
+                "state": "Confirmed"
+              }
+            ],
+            "masking": {
+              "generatorType": "Categorical",
+              "link": "First_Name"
+            },
+            "description": "customer's gender"
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "constraint": "NOT_NULL",
+            "tags": [
+              {
+                "tagFQN": "PII",
+                "source": "Tag",
+                "labelType": "Manual",
+                "state": "Confirmed"
+              }
+            ],
+            "masking": {
+              "generatorType": "Email"
+            },
+            "description": "email"
+          },
+          {
+            "name": "Phone_Number",
+            "dataType": "string",
+            "constraint": "NOT_NULL",
+            "masking": {
+              "generatorType": "PhoneNumber"
+            },
+            "description": "customer phone number"
+          },
+          {
+            "name": "Marital_Status",
+            "dataType": "string",
+            "constraint": "NOT_NULL",
+            "description": "status"
+          },
+          {
+            "name": "Number_Of_Children",
+            "dataType": "number",
+            "constraint": "NOT_NULL",
+            "masking": {
+              "generatorType": "RandomInteger",
+              "specific": {
+                "minimum": 0,
+                "maximum": 3
+              }
+            },
+            "description": "number of children"
+          },
+          {
+            "name": "Annual_Income",
+            "dataType": "number",
+            "constraint": "NOT_NULL",
+            "description": "annual income"
+          },
+          {
+            "name": "Occupation",
+            "dataType": "string",
+            "constraint": "NOT_NULL",
+            "description": "occupation"
+          },
+          {
+            "name": "Largest_Bill_Amount",
+            "dataType": "number",
+            "constraint": "NOT_NULL",
+            "description": "largest bill amount"
+          },
+          {
+            "name": "Store_Membership_Card",
+            "dataType": "string",
+            "constraint": "NOT_NULL",
+            "masking": {
+              "generatorType": "TextMask"
+            },
+            "description": "store card"
+          },
+          {
+            "name": "Birth_Date",
+            "dataType": "date",
+            "tags": [
+              {
+                "tagFQN": "Sensitive",
+                "source": "Tag",
+                "labelType": "Manual",
+                "state": "Confirmed"
+              }
+            ],
+            "masking": {
+              "generatorType": "RandomTimestamp",
+              "specific": {
+                "minimum": "01-01-1980",
+                "maximum": "31-12-2010"
+              }
+            },
+            "constraint": null,
+            "description": "birth date"
+          },
+          {
+            "name": "Customer_Since",
+            "dataType": "date",
+            "constraint": null,
+            "description": "customer since"
+          },
+          {
+            "name": "Last_Transaction",
+            "dataType": "date",
+            "constraint": null,
+            "description": "last transaction"
+          },
+          {
+            "name": "Ext_Demographic_Data",
+            "dataType": "string",
+            "constraint": null,
+            "description": "additional data"
+          },
+          {
+            "name": "Residence_Zip",
+            "dataType": "string",
+            "constraint": null,
+            "description": "zip code"
+          },
+          {
+            "name": "Preferred_Language",
+            "dataType": "string",
+            "constraint": null,
+            "description": "language preference"
+          }
+        ],
+        "termsAndConditions": null,
+        "endpoint": null,
+        "SLA": {
+          "intervalOfChange": null,
+          "timeliness": null,
+          "upTime": null
+        }
+      },
+      "dataSharingAgreements": {
+        "purpose": null,
+        "billing": null,
+        "security": null,
+        "intendedUsage": null,
+        "limitations": null,
+        "lifeCycle": null,
+        "confidentiality": null
+      },
+      "tags": [],
+      "sampleData": null,
+      "semanticLinking": [],
+      "specific": {
+        "sql": "> SELECT * FROM features",
+        "dependsOn": [],
+        "reflectionDefinitions": [],
+        "supportVds": [],
+        "supportPds": [],
+        "format": null
+      },
+      "consumable": true,
+      "shoppable": true
+    },
+    {
+      "kind": "outputport",
+      "id": "urn:dmb:cmp:finance-risk:customer-risk_6:0:customer-risk-port",
+      "description": "All the most important risk traits of a customer",
+      "name": "Customer Risk Port",
+      "fullyQualifiedName": "Customer Risk Port",
+      "version": "0.0.0",
+      "infrastructureTemplateId": "urn:dmb:itm:aws-dremio-provisioner:1",
+      "useCaseTemplateId": "urn:dmb:utm:aws-dremio-template:0.0.0",
+      "dependsOn": [],
+      "platform": "PostgreSQL",
+      "technology": "PostgreSQL",
+      "outputPortType": "SQL",
+      "creationDate": null,
+      "startDate": null,
+      "processDescription": "Consolidates standardized risk features",
+      "dataContract": {
+        "schema": [
+          {
+            "name": "customerId",
+            "dataType": "string",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "reference_date",
+            "dataType": "date",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "number_of_loans",
+            "dataType": "number",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "debt_amount",
+            "dataType": "number",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "net_income",
+            "dataType": "number",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "number_of_90latepayments",
+            "dataType": "number",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "number_of_60latepayments",
+            "dataType": "number",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "age",
+            "dataType": "number",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "mybank_riskscore",
+            "dataType": "number",
+            "constraint": "NOT_NULL"
+          },
+          {
+            "name": "last_update",
+            "dataType": "date",
+            "constraint": null
+          }
+        ],
+        "termsAndConditions": "It can be used for production purposes",
+        "endpoint": "https://api/staging/finance/customerrisk/6.0.0/customerrisk",
+        "SLA": {
+          "intervalOfChange": "1 week",
+          "timeliness": "1 hour",
+          "upTime": "99%"
+        }
+      },
+      "dataSharingAgreements": {
+        "purpose": "official risk indicators for customers.",
+        "billing": null,
+        "security": null,
+        "intendedUsage": "used for underwriting and KYC processes. This information should never be communicated to the customer itself",
+        "limitations": null,
+        "lifeCycle": "data is calculated monthly and there are not retention policies applied",
+        "confidentiality": null
+      },
+      "tags": [],
+      "sampleData": null,
+      "semanticLinking": [],
+      "specific": {
+        "sql": "> SELECT * FROM risk_port",
+        "dependsOn": [],
+        "reflectionDefinitions": [],
+        "supportVds": [],
+        "supportPds": [],
+        "format": null
+      },
+      "consumable": true,
+      "shoppable": true
+    }
+  ]
+}

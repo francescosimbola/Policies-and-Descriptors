@@ -1,0 +1,202 @@
+{
+  "id": "urn:dmb:dp:finance:cashflow_7:0",
+  "name": "cashflow_7",
+  "version": "0.3.7",
+  "fullyQualifiedName": "Liquidity Cash Flows v3 \u2014 7",
+  "domain": "finance/liquidity",
+  "tags": [
+    "finance",
+    "gdpr",
+    "restricted"
+  ],
+  "orchestration": {
+    "tool": "Lambda+StepFunctions",
+    "details": {
+      "stateMachine": "CashflowETL"
+    }
+  },
+  "qualityControls": {
+    "framework": "GreatExpectations",
+    "controls": [
+      {
+        "expectation": "expect_column_values_to_not_be_null",
+        "columns": [
+          "CF_ID"
+        ]
+      },
+      {
+        "expectation": "expect_column_values_to_be_between",
+        "column": "GrossAmount",
+        "min": 0
+      },
+      {
+        "expectation": "expect_column_values_to_be_in_set",
+        "column": "FlowType",
+        "set": [
+          "IN",
+          "OUT"
+        ]
+      },
+      {
+        "expectation": "expect_table_row_count_to_be_between",
+        "min": 1
+      }
+    ],
+    "additionalFrameworks": [
+      "Deequ"
+    ]
+  },
+  "workloads": [
+    {
+      "name": "purge_personal_data",
+      "type": "lambda",
+      "description": "Implements right to be forgotten by purging matching records."
+    }
+  ],
+  "metadata": {
+    "owner": {
+      "team": "Treasury IT",
+      "contact": "treasury-engineering@example.org"
+    },
+    "costCenter": "FIN-LQD",
+    "classification": "restricted",
+    "description": "Data product delivering cash movement facts; non-sensitive aggregates only."
+  },
+  "observability": {
+    "metrics": [
+      "row_count",
+      "null_rate",
+      "latency"
+    ],
+    "logging": {
+      "level": "INFO",
+      "retentionDays": 14
+    }
+  },
+  "lineage": {
+    "upstreamSources": [
+      {
+        "system": "ERP",
+        "object": "GL_Bookings"
+      },
+      {
+        "system": "BankAPI",
+        "object": "Movements"
+      }
+    ]
+  },
+  "dataContracts": [
+    {
+      "id": "urn:dmb:dp:finance:cashflow_7:0:snowflaketable_output",
+      "type": "SnowflakeTable",
+      "schema": [
+        {
+          "name": "CF_ID",
+          "dataType": "STRING",
+          "description": "Unique internal identifier for a cash flow row."
+        },
+        {
+          "name": "GrossAmount",
+          "dataType": "DECIMAL(18,2)",
+          "description": "Monetary movement in EUR; non-negative."
+        },
+        {
+          "name": "FlowType",
+          "dataType": "STRING",
+          "description": "IN for incoming cash, OUT for outgoing cash."
+        },
+        {
+          "name": "GLDate",
+          "dataType": "DATE",
+          "description": "Ledger posting date."
+        }
+      ],
+      "columnTags": {
+        "FlowType": {
+          "businessTerms": [
+            "PostingChannel",
+            "SettlementMethod"
+          ]
+        }
+      },
+      "sla": {
+        "intervalOfChange": "P2D",
+        "timeliness": "PT45M",
+        "upTime": 0.986
+      }
+    },
+    {
+      "id": "urn:dmb:dp:finance:cashflow_7:0:kafka_output",
+      "type": "KafkaTopic",
+      "topic": "liquidity.cashflow.variant.7",
+      "partitions": 3,
+      "retentionDays": 12,
+      "schema": [
+        {
+          "name": "CF_ID",
+          "dataType": "STRING"
+        },
+        {
+          "name": "GrossAmount",
+          "dataType": "DOUBLE"
+        },
+        {
+          "name": "FlowType",
+          "dataType": "STRING"
+        },
+        {
+          "name": "EventTime",
+          "dataType": "TIMESTAMP"
+        }
+      ],
+      "columnTags": {
+        "FlowType": {
+          "businessTerms": [
+            "PostingChannel"
+          ]
+        }
+      }
+    },
+    {
+      "id": "urn:dmb:dp:finance:cashflow_7:0:snowflaketable_aux",
+      "type": "SnowflakeTable",
+      "schema": [
+        {
+          "name": "CF_ID",
+          "dataType": "STRING",
+          "description": "Primary event identifier."
+        },
+        {
+          "name": "GrossAmount",
+          "dataType": "NUMERIC",
+          "description": "Amount in EUR, zero or positive."
+        },
+        {
+          "name": "FlowType",
+          "dataType": "STRING",
+          "description": "Direction of cash flow."
+        },
+        {
+          "name": "GLDate",
+          "dataType": "DATE",
+          "description": "Accounting date."
+        },
+        {
+          "name": "EventTime",
+          "dataType": "TIMESTAMP",
+          "description": "Event timestamp."
+        }
+      ],
+      "sla": {
+        "intervalOfChange": "P1D",
+        "timeliness": "PT45M",
+        "upTime": 0.976
+      }
+    }
+  ],
+  "notes": [
+    "Variant 7: topic=liquidity.cashflow.variant.7, partitions=3, retention=12d.",
+    "Descriptions in streaming schema are intentionally absent to test contract completeness checks.",
+    "No PII is modeled; GDPR tag remains at product level only."
+  ]
+}
