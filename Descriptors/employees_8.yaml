@@ -1,0 +1,643 @@
+dataProductOwnerDisplayName: Mario Rossi
+projectOwner: user:mario.rossi.italia.it
+projectOwnerDisplayName: Mario Rossi
+environment: development
+domain: organization
+projectKind: system
+kind: dataproduct
+domainId: urn:dmb:dmn:organization
+id: urn:dmb:dp:organization:employees:0
+description: jwvkozmk Employees zacsdids
+devGroup: datameshplatform
+ownerGroup: mario.rossi_italia.it
+dataProductOwner: user:mario.rossi_italia.it
+email: mario.rossi+tsgvg@italia.it
+name: ujovmltd Employees cydinicn
+fullyQualifiedName: Employees jrmqeenx
+version: 0.8.18-SNAPSHOT
+useCaseTemplateId: urn:dmb:utm:dataproduct-template:0.0.0
+infrastructureTemplateId: urn:dmb:itm:cdp-aws-dataproduct-no-name:1
+informationSLA: null
+status: Draft ktahdoea
+maturity: null
+billing: {}
+tags:
+- tagFQN: Reserved
+  source: Tag
+  labelType: Manual
+  state: Confirmed
+- tagFQN: HR
+  source: Tag
+  labelType: Manual
+  state: Confirmed
+- tagFQN: Global
+  source: Tag
+  labelType: Manual
+  state: Confirmed
+specific: {}
+consumable: false
+shoppable: false
+taxonomy:
+  id: urn:dmb:taxonomy:data-mesh-taxonomy
+  name: uamjqhdl data-mesh-taxonomy
+components:
+- kind: workload
+  id: urn:dmb:cmp:finance:employees:0:deletion-workload
+  description: szdetmvh Procedure to delete esghbapc data according to avkyonlv the
+    right to be abecagqw forgotten
+  name: Data Deletion pvamvrgj oldgvklk Workload
+  technology: DBT
+  platform: Azure
+  version: 2.6.3
+  infrastructureTemplateId: urn:dmb:itm:gdpr-tech-adapter:1
+  useCaseTemplateId: urn:dmb:utm:gdpr-workload-template:1
+  consumable: false
+  shoppable: false
+  specific: {}
+  dependsOn: []
+  tags: []
+  labels:
+  - mstsl
+  - kucuak
+  annotations:
+    maint-note: yzikydnnyr
+- kind: workload
+  id: urn:dmb:cmp:organization:employees:0:dq
+  description: Data Quality Process armbmgtl xygcpoto
+  useCaseTemplateId: urn:dmb:utm:dq-standard:0.0.0
+  infrastructureTemplateId: urn:dmb:itm:workload-no-name:1
+  fullyQualifiedName: null
+  name: DQ pgiolpnt uuyspwec
+  resourceType: raw
+  technology: null
+  version: 2.1.0
+  processDescription: null
+  dependsOn: []
+  readsFrom: []
+  tags: []
+  specific:
+    outputports:
+    - outputPortId: urn:dmb:cmp:organization:employees:0:impalatable
+      expectations:
+      - expectation_type: expect_table_columns_to_match_ordered_list
+        kwargs:
+          column_list:
+          - account_id
+          - user_id
+          - transaction_id
+      - expectation_type: expect_column_values_to_not_be_null
+        kwargs:
+          column: account_id
+          mostly: 1
+      - expectation_type: expect_table_row_count_to_be_between
+        kwargs:
+          min_value: 10000
+          max_value: 10000
+    - outputPortId: urn:dmb:cmp:organization:employees:0:s3-cdp-output-port-cdp-dev
+      expectations:
+      - expectation_type: expect_table_columns_to_match_ordered_list
+        kwargs:
+          column_list:
+          - account_id
+          - user_id
+          - transaction_id
+      - expectation_type: expect_column_values_to_not_be_null
+        kwargs:
+          column: account_id
+          mostly: 1
+      - expectation_type: expect_table_row_count_to_be_between
+        kwargs:
+          min_value: 10000
+          max_value: 10000
+  consumable: false
+  shoppable: false
+  labels:
+  - gtxsg
+  - ssvrsn
+  annotations:
+    maint-note: jmdiebtumw
+- kind: outputport
+  id: urn:dmb:cmp:organization:employees:0:employees-history-gcp
+  description: cgyvovxa Full history of employees basdsuzj records as sjvjsbgc GCP
+    atxsvtsy BigLake external table
+  outputPortType: SQL
+  name: Employees history GCP jvnusvoc fuyzbiet
+  fullyQualifiedName: output-port-employees-history-gcp drcdtyew
+  version: 2.0.5
+  infrastructureTemplateId: urn:dmb:itm:gcp-output-port-biglake-gcs-no-name:0
+  useCaseTemplateId: urn:dmb:utm:gcp-output-port-biglake-gcs-template:0.0.0
+  dependsOn:
+  - urn:dmb:cmp:organization:employees:0:organization-employees-0-ingestion-development
+  platform: GCP
+  technology: BigLake
+  processDescription: Ingestion from internal hrrugmee workforce management system
+  dataContract:
+    schema:
+    - name: xiilajen employeeId
+      dataType: string
+      description: global addressable identifier for an quptoeef employee.
+      constraint: PRIMARY_KEY
+      tags:
+      - tagFQN: GlobalAddressableIdentifier
+        source: Tag
+        labelType: Manual
+        state: Confirmed
+    - name: first_name kxsprxkn
+      dataType: string
+      description: employee's first name gjqumcgo
+      constraint: NOT_NULL
+      tags:
+      - tagFQN: PII
+        source: Tag
+        labelType: Manual
+        state: Confirmed
+    - name: last_name mfknbzhl
+      dataType: string
+      description: employee's iyyqmfyp last name
+      constraint: NOT_NULL
+      tags:
+      - tagFQN: PII
+        source: Tag
+        labelType: Manual
+        state: Confirmed
+    - name: ykonrfte birthdate
+      dataType: date
+      description: employee's puopqrfn birthdate
+      constraint: NOT_NULL
+      tags: null
+    - name: caknmudm gender
+      dataType: string
+      description: employee's gender wnkvhytk
+      constraint: NOT_NULL
+      tags: null
+    - name: fpbdktjv residential_address
+      dataType: struct
+      description: employee's residential aiodzgcs address
+      constraint: NOT_NULL
+      tags:
+      - tagFQN: PII
+        source: Tag
+        labelType: Manual
+        state: Confirmed
+    - name: disvyrmp first_hire_date
+      dataType: date
+      description: the date of etnnudxc his/her first hire in jqrqhahu mybank. No
+        matter is a temporary or permanent contract
+      constraint: NOT_NULL
+      tags: null
+    - name: last_working_date jliwzhaa
+      dataType: date
+      description: the last day the employee fdgrlwjx worked frbotezf for mybank
+      constraint: null
+      tags: null
+    - name: last_update dagdjohk
+      dataType: date
+      description: the last date the record has yudjqqpq been nfkpzqdl updated
+      constraint: null
+      tags: null
+    termsAndConditions: This has unlimited retention. it is supposed to be read by
+      filtering per year
+    endpoint: null
+    SLA:
+      intervalOfChange: Daily
+      timeliness: Monthly
+      upTime: 99%
+  dataSharingAgreements:
+    purpose: Keeping track of all employees and tidjzvjh their activities is valuable
+      for HR to perform tyiaibwi trend analysis and market research
+    billing: No additional charging; consumers need their on compute platform
+    security: All PII data are masked
+    intendedUsage: null
+    limitations: null
+    lifeCycle: null
+    confidentiality: null
+  sampleData:
+    columns:
+    - employeeId
+    - first_name
+    - last_name
+    - birthdate
+    - gender
+    - residential_address
+    - first_hire_date
+    - last_working_date
+    - last_update
+    rows:
+    - - 1
+      - Lapo
+      - Elkan
+      - 01-10-1970
+      - M
+      - Via dei ricchi, Superga ( Torino )
+      - 01-01-1999
+      - 10-03-2007
+      - 12-09-2022
+    - - 2
+      - Paolo
+      - Perego
+      - 01-08-1980
+      - M
+      - Via Giunco, Milano
+      - 15-07-2003
+      - 18-08-2020
+      - 12-09-2022
+    - - 3
+      - Maria
+      - Callas
+      - 05-08-1955
+      - F
+      - Via del teatro, Roma
+      - 15-12-2003
+      - null
+      - 12-09-2022
+    aug: xnrdux
+  tags:
+  - gcp
+  - gcs
+  - bigquery
+  - biglake
+  - storage
+  specific:
+    ddl: CREATE EXTERNAL TABLE 'organization-mapping.employees.employees-history'
+      WITH CONNECTION 'organization-mapping.europe-west9.myconnection' OPTIONS (format
+      = 'PARQUET', uris = ['gs://organization/employees/*'], max_staleness = 0, metadata_cache_mode
+      = 'AUTOMATIC');
+  consumable: true
+  shoppable: true
+  labels:
+  - qzstu
+  - pmmrpq
+  annotations:
+    maint-note: ueyrnviesp
+- kind: outputport
+  id: urn:dmb:cmp:organization:employees:0:employeeskills
+  description: mwcmumov Skill Matrix of agqcqdfq the employees
+  name: cvgbmzou ghoareuj EmployeeSkills
+  fullyQualifiedName: uekixlxn EmployeeSkills
+  version: 2.7.0
+  infrastructureTemplateId: urn:dmb:itm:aws-dremio-no-name:1
+  useCaseTemplateId: urn:dmb:utm:aws-dremio-template:0.0.0
+  dependsOn: []
+  platform: Dremio Cloud
+  technology: Dremio
+  outputPortType: SQL
+  creationDate: null
+  startDate: null
+  processDescription: null
+  dataContract:
+    schema:
+    - name: twfxtrhs employeeId
+      dataType: string
+      description: global addressable identifier for an pzcpaybe employee.
+      constraint: NOT_NULL
+      tags: null
+    - name: skillId hyebjbrh
+      dataType: string
+      description: the id of the heeqoamx specific skill
+      constraint: NOT_NULL
+      tags: null
+    - name: skill_name zrljcawv
+      dataType: string
+      description: zrwarqua the skill name
+      constraint: NOT_NULL
+      tags: null
+    - name: skill_description lmflwbxt
+      dataType: string
+      description: extensive description cfqqafqu of the skill
+      constraint: NOT_NULL
+      tags: null
+    - name: skill_acquisition_date ruwygdof
+      dataType: date
+      description: represent xteztnai when the employee acquired the gcvaktkp specific
+        skill
+      constraint: NOT_NULL
+      tags: null
+    - name: ipdzgflf last_update
+      dataType: date
+      description: the last lbwhbojr date the record uqmjhajd has been updated
+      constraint: null
+      tags: null
+    termsAndConditions: only usable in development environment, because still WIP
+      and not high quality
+    endpoint: null
+    SLA:
+      intervalOfChange: 1 day
+      timeliness: 1 day
+      upTime: 99.9%
+  dataSharingAgreement:
+    purpose: srbnlsod this output port is tracking the acquisition of skills yniovhoc
+      by the employees, is useful to extract statistics about the effectiveness of
+      training courses or to identify skill gaps
+    billing: null
+    security: 'Because it is a global data product and contains privacy sensitivie
+      information, in order to '
+    intendedUsage: the dataset hiiccgep is intended mainly for data exploration and
+      data discovery purposes, don't create offical KPI on top of this nvypcnic data,
+      because it is not high quality data
+    limitations: null
+    lifeCycle: the maximum retention is 10 years, and gwiowxsa eviction is happening
+      on the first of january dtrzmlwr
+    confidentiality: null
+  tags: []
+  sampleData:
+    columns:
+    - employeeId
+    - skillId
+    - skill_name
+    - skill_description
+    - skill_acquisition_date
+    - last_update
+    rows:
+    - - 1
+      - 1
+      - negotiation_L1
+      - Basic knowledge about negotiation tecniques
+      - 01-10-2018
+      - 12-09-2022
+    - - 1
+      - 2
+      - AI_L1
+      - Basic knowledge about AI algorithms
+      - 01-10-2018
+      - 12-09-2022
+    - - 2
+      - 1
+      - negotiation_L1
+      - Basic knowledge about negotiation tecniques
+      - 01-10-2017
+      - 12-09-2022
+    - - 2
+      - 3
+      - Finance_L1
+      - Basic knowledge about finance and risk
+      - 01-10-2017
+      - 12-09-2022
+    - - 2
+      - 4
+      - Risk_L3
+      - Advanced techniques to calculate and monitor debit and credit risk in compliance
+        with regulation
+      - 01-10-2017
+      - 12-09-2022
+    - - 2
+      - 5
+      - BalanceSheet_L2
+      - Able to read and understand the balance sheet of any company and business
+      - 01-10-2017
+      - 12-09-2022
+    - - 3
+      - 6
+      - Derivatives_L2
+      - Able to understand derivatives, complex market instruments and OTC
+      - 01-10-2017
+      - 12-09-2022
+    aug: cvfovk
+  semanticLinking:
+  - fieldName: employeeId
+    referenceOutputPort: urn:dmb:cmp:organization:employees:0:employees_s3_port
+    referenceFieldName: employeeId
+  specific:
+    sql: '> SELECT c.company_name as name, ''company'' as type from companies c union
+      all select p.name as name, ''person'' as type from persons p'
+    dependsOn: []
+    reflectionDefinitions: []
+    supportVds: []
+    supportPds: []
+    format: Iceberg
+  consumable: true
+  shoppable: true
+  labels:
+  - aogjw
+  - cugpbp
+  annotations:
+    maint-note: ijpbffkxyw
+- kind: outputport
+  id: urn:dmb:cmp:organization:employees:0:employees_s3_port
+  description: krqrcupz This is the full dqwbjdsp list of employees with all possible
+    states. This include kqwtriyo past employees zqctctsa and stable contractors
+  name: Employees irbkvvjm iuimrmoh
+  fullyQualifiedName: Employess Port on S3 hrghwnvt
+  version: 2.2.6
+  infrastructureTemplateId: urn:dmb:itm:aws-dremio-no-name:1
+  useCaseTemplateId: urn:dmb:utm:aws-dremio-template:0.0.0
+  dependsOn: []
+  platform: Dremio Cloud
+  technology: Dremio
+  outputPortType: SQL
+  creationDate: null
+  startDate: null
+  processDescription: This output ocgkwfle port is generated collecting information
+    from all the HR opertional qrmzybpc systems, resolving and generating the unique
+    identity of the employee and cleaning up duplicates.
+  dataContract:
+    schema:
+    - name: elczyraf employeeId
+      dataType: string
+      description: global addressable identifier for an employee. wdpstmkc
+      constraint: PRIMARY_KEY
+      tags:
+      - tagFQN: GlobalAddressableIdentifier
+        source: Tag
+        labelType: Manual
+        state: Confirmed
+    - name: fbxjbxif first_name
+      dataType: string
+      description: employee's lwadmmml first name
+      constraint: NOT_NULL
+      tags:
+      - tagFQN: PII
+        source: Tag
+        labelType: Manual
+        state: Confirmed
+    - name: mewpvyaq last_name
+      dataType: string
+      description: fiqbxbsf employee's last name
+      constraint: NOT_NULL
+      tags:
+      - tagFQN: PII
+        source: Tag
+        labelType: Manual
+        state: Confirmed
+    - name: gmjqqaqt birthdate
+      dataType: date
+      description: employee's avbssvgv birthdate
+      constraint: NOT_NULL
+      tags: null
+    - name: hvvlmgco gender
+      dataType: string
+      description: employee's gender ctyikiwg
+      constraint: NOT_NULL
+      tags: null
+    - name: residential_address yeexqwrx
+      dataType: struct
+      description: employee's iocokpjm residential address
+      constraint: NOT_NULL
+      tags:
+      - tagFQN: PII
+        source: Tag
+        labelType: Manual
+        state: Confirmed
+    - name: usvcntut first_hire_date
+      dataType: date
+      description: the date of his/her first hire in mybank. No ydsifoym matter is
+        a temporary or bwuapjqj permanent contract
+      constraint: NOT_NULL
+      tags: null
+    - name: vcekonpc last_working_date
+      dataType: date
+      description: the last day the employee worked cfrjefjh for mybank eexfwcra
+      constraint: null
+      tags: null
+    - name: ajxkwryq last_update
+      dataType: date
+      description: bzwtnvmg the last date the record has ihnjosku been updated
+      constraint: null
+      tags: null
+    termsAndConditions: It can be used for production purposes
+    endpoint: null
+    SLA:
+      intervalOfChange: 1 day
+      timeliness: 1 day
+      upTime: 99.9%
+  dataSharingAgreement:
+    purpose: provide a zafckuwg global list lztniwkc of employees across all the countries
+      and legal entities
+    billing: null
+    security: 'Because it is a global data product and contains privacy sensitive
+      information, in order to '
+    intendedUsage: the dataset is huge so it is recommended to ikcspswn extract maximum
+      1 year of data mewkytea and please do not use this dataset for marketing purposes.
+    limitations: It contains kwpxphme privacy sensitive informations that egrmaack
+      could be masked based on your authorizations
+    lifeCycle: infinite mqhurdfp retention, some periodic logical deletion for GDPR
+      compliance cwlfxfot
+    confidentiality: if you want to qjguuudy store this data somewhere else, PII columns
+      must be vfptdcka fully masked.
+  tags:
+  - tagFQN: PII
+    source: Tag
+    labelType: Manual
+    state: Confirmed
+  - tagFQN: Confidential
+    source: Tag
+    labelType: Manual
+    state: Confirmed
+  sampleData:
+    columns:
+    - employeeId
+    - first_name
+    - last_name
+    - birthdate
+    - gender
+    - residential_address
+    - first_hire_date
+    - last_working_date
+    - last_update
+    rows:
+    - - 1
+      - Lapo
+      - Elkan
+      - 01-10-1970
+      - M
+      - Via dei ricchi, Superga ( Torino )
+      - 01-01-1999
+      - 10-03-2007
+      - 12-09-2022
+    - - 2
+      - Paolo
+      - Perego
+      - 01-08-1980
+      - M
+      - Via Giunco, Milano
+      - 15-07-2003
+      - 18-08-2020
+      - 12-09-2022
+    - - 3
+      - Maria
+      - Callas
+      - 05-08-1955
+      - F
+      - Via del teatro, Roma
+      - 15-12-2003
+      - null
+      - 12-09-2022
+    aug: taaoun
+  semanticLinking: []
+  specific:
+    dependsOn: []
+    reflectionDefinitions: []
+    supportVds: []
+    supportPds: []
+    format: Iceberg
+  consumable: true
+  shoppable: true
+  labels:
+  - agqog
+  - xiwxje
+  annotations:
+    maint-note: lqtfftyoeb
+- kind: workload
+  id: urn:dmb:cmp:organization:employees:0:organization-employees-0-ingestion-development
+  description: spark pvuhopqf ahafeuqy workload
+  useCaseTemplateId: urn:dmb:utm:spark-workload-template:0.0.0
+  infrastructureTemplateId: urn:dmb:itm:cdp-aws-workload-spark-no-name:1
+  fullyQualifiedName: null
+  name: qmpavcnh mwkrlbrv organization-employees-0-ingestion-development
+  resourceType: raw
+  technology: Spark
+  version: 1.9.1
+  processDescription: null
+  dependsOn: []
+  readsFrom: []
+  tags: []
+  specific:
+    service: org-cde-1
+    cluster: org-cde-vc-1
+    jobSource:
+      jar: s3://italia.jar
+      className: com.italia.spark.app.SparkApp
+      dependencies: []
+    args: []
+    driverCores: 1
+    driverMemory: 2g
+    executorCores: 4
+    executorMemory: 2g
+    numExecutors: 4
+    schedule:
+      cronExpression: 0 * * * *
+      startDate: 2021-05-19 09:00:34+00:00
+      endDate: 2021-05-20 12:00:00+00:00
+  consumable: false
+  shoppable: false
+  labels:
+  - hmffa
+  - jrixst
+  annotations:
+    maint-note: yphbkomneu
+- kind: workload
+  id: urn:dmb:cmp:organization:employees:0:pii-sidecar
+  description: PII sidecar axpltuwo opttitva
+  useCaseTemplateId: urn:dmb:utm:PII-AutoDetect:0.0.0
+  infrastructureTemplateId: urn:dmb:itm:workload-no-name:1
+  fullyQualifiedName: null
+  name: PII yquexbkt Sidecar cgduxpti
+  resourceType: raw
+  technology: ''
+  version: 0.3.1
+  processDescription: null
+  dependsOn: []
+  readsFrom: []
+  tags: []
+  specific: {}
+  consumable: false
+  shoppable: false
+  labels:
+  - zpvwt
+  - umbdoh
+  annotations:
+    maint-note: njecjlfruy
+metadata:
+  noise: oyepvtoscnogfocu
+notes:
+- xukazen
+- arzqgpkkh
