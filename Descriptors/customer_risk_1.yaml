@@ -1,6 +1,6 @@
-dataProductOwnerDisplayName: Paolo Platter
-projectOwner: user:paolo.platter_agilelab.it
-projectOwnerDisplayName: Paolo Platter
+dataProductOwnerDisplayName: Mario Rossi
+projectOwner: user:mario.rossi.italia.it
+projectOwnerDisplayName: Mario Rossi
 environment: development
 domain: finance-risk
 projectKind: system
@@ -9,16 +9,16 @@ domainId: urn:dmb:dmn:financerisk
 id: urn:dmb:dp:finance-risk:customer-risk:0
 description: this represents the risk traits of a customer
 devGroup: bigdata
-ownerGroup: paolo.platter_agilelab.it
-dataProductOwner: user:paolo.platter_agilelab.it
-email: paolo.platter@agilelab.it
+ownerGroup: mario.rossi_italia.it
+dataProductOwner: user:mario.rossi_italia.it
+email: mario.rossi@italia.it
 version: 0.2.0-SNAPSHOT-1
 fullyQualifiedName: null
 name: Customer Risk
 informationSLA: null
 maturity: Strategic
 useCaseTemplateId: urn:dmb:utm:dataproduct-template:0.0.0
-infrastructureTemplateId: urn:dmb:itm:dataproduct-provisioner:1
+infrastructureTemplateId: urn:dmb:itm:dataproduct-no-name:1
 billing: {}
 tags:
   - tagFQN: GDPR
@@ -62,7 +62,7 @@ components:
     name: Customer Features
     fullyQualifiedName: null
     version: 0.0.0
-    infrastructureTemplateId: urn:dmb:itm:aws-dremio-provisioner:1
+    infrastructureTemplateId: urn:dmb:itm:aws-dremio-no-name:1
     useCaseTemplateId: urn:dmb:utm:aws-dremio-template:0.0.0
     dependsOn: []
     platform: Dremio Cloud
@@ -221,7 +221,7 @@ components:
     name: Customer Risk Port
     fullyQualifiedName: Customer Risk Port
     version: 0.0.0
-    infrastructureTemplateId: urn:dmb:itm:aws-dremio-provisioner:1
+    infrastructureTemplateId: urn:dmb:itm:aws-dremio-no-name:1
     useCaseTemplateId: urn:dmb:utm:aws-dremio-template:0.0.0
     dependsOn: []
     platform: Dremio Cloud
@@ -272,7 +272,7 @@ components:
           constraint: null
           tags: null
       termsAndConditions: It can be used for production purposes
-      endpoint: https://myurl/development/finance/customerrisk/1.0.0/customerrisk
+      endpoint: https://customerrisk
       SLA:
         intervalOfChange: 1 day
         timeliness: 1 day
