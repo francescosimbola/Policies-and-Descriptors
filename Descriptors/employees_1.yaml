@@ -1,6 +1,6 @@
-dataProductOwnerDisplayName: Luigi Baldari
-projectOwner: user:luigi.baldari_agilelab.it
-projectOwnerDisplayName: Luigi Baldari
+dataProductOwnerDisplayName: Mario Rossi
+projectOwner: user:mario.rossi.italia.it
+projectOwnerDisplayName: Mario Rossi
 environment: development
 domain: organization
 projectKind: system
@@ -9,14 +9,14 @@ domainId: urn:dmb:dmn:organization
 id: urn:dmb:dp:organization:employees:0
 description: Employees
 devGroup: datameshplatform
-ownerGroup: luigi.baldari_agilelab.it
+ownerGroup: mario.rossi_italia.it
+dataProductOwner: user:mario.rossi_italia.it
+email: mario.rossi@italia.it
 name: Employees
 fullyQualifiedName: Employees
 version: 0.17.0-SNAPSHOT-1
 useCaseTemplateId: urn:dmb:utm:dataproduct-template:0.0.0
-infrastructureTemplateId: urn:dmb:itm:cdp-aws-dataproduct-provisioner:1
-dataProductOwner: user:luigi.baldari_agilelab.it
-email: luigi.baldari@agilelab.it
+infrastructureTemplateId: urn:dmb:itm:cdp-aws-dataproduct-no-name:1
 informationSLA: null
 status: Draft
 maturity: null
@@ -59,7 +59,7 @@ components:
     id: urn:dmb:cmp:organization:employees:0:dq
     description: Data Quality Process
     useCaseTemplateId: urn:dmb:utm:dq-standard:0.0.0
-    infrastructureTemplateId: urn:dmb:itm:workload-provisioner:1
+    infrastructureTemplateId: urn:dmb:itm:workload-no-name:1
     fullyQualifiedName: null
     name: DQ
     resourceType: raw
@@ -112,7 +112,7 @@ components:
     name: Employees history GCP
     fullyQualifiedName: output-port-employees-history-gcp
     version: 0.0.0
-    infrastructureTemplateId: urn:dmb:itm:gcp-output-port-biglake-gcs-provisioner:0
+    infrastructureTemplateId: urn:dmb:itm:gcp-output-port-biglake-gcs-no-name:0
     useCaseTemplateId: urn:dmb:utm:gcp-output-port-biglake-gcs-template:0.0.0
     dependsOn:
       - urn:dmb:cmp:organization:employees:0:organization-employees-0-ingestion-development
@@ -257,7 +257,7 @@ components:
     name: EmployeeSkills
     fullyQualifiedName: EmployeeSkills
     version: 0.0.0
-    infrastructureTemplateId: urn:dmb:itm:aws-dremio-provisioner:1
+    infrastructureTemplateId: urn:dmb:itm:aws-dremio-no-name:1
     useCaseTemplateId: urn:dmb:utm:aws-dremio-template:0.0.0
     dependsOn: []
     platform: Dremio Cloud
@@ -394,7 +394,7 @@ components:
     name: Employees
     fullyQualifiedName: Employess Port on S3
     version: 0.0.0
-    infrastructureTemplateId: urn:dmb:itm:aws-dremio-provisioner:1
+    infrastructureTemplateId: urn:dmb:itm:aws-dremio-no-name:1
     useCaseTemplateId: urn:dmb:utm:aws-dremio-template:0.0.0
     dependsOn: []
     platform: Dremio Cloud
@@ -550,7 +550,7 @@ components:
     id: urn:dmb:cmp:organization:employees:0:organization-employees-0-ingestion-development
     description: spark workload
     useCaseTemplateId: urn:dmb:utm:spark-workload-template:0.0.0
-    infrastructureTemplateId: urn:dmb:itm:cdp-aws-workload-spark-provisioner:1
+    infrastructureTemplateId: urn:dmb:itm:cdp-aws-workload-spark-no-name:1
     fullyQualifiedName: null
     name: organization-employees-0-ingestion-development
     resourceType: raw
@@ -564,8 +564,8 @@ components:
       service: org-cde-1
       cluster: org-cde-vc-1
       jobSource:
-        jar: s3://cdp-artifacts-eu-west-1-512175274871/domain:organization/system:organization.employees.0/0.0.0/spark-app-0.0.0.jar
-        className: com.agilelab.bigdata.workload.spark.app.SparkApp
+        jar: s3://italia.jar
+        className: com.italia.spark.app.SparkApp
         dependencies: []
       args: []
       driverCores: 1
@@ -583,7 +583,7 @@ components:
     id: urn:dmb:cmp:organization:employees:0:pii-sidecar
     description: PII sidecar
     useCaseTemplateId: urn:dmb:utm:PII-AutoDetect:0.0.0
-    infrastructureTemplateId: urn:dmb:itm:workload-provisioner:1
+    infrastructureTemplateId: urn:dmb:itm:workload-no-name:1
     fullyQualifiedName: null
     name: PII Sidecar
     resourceType: raw

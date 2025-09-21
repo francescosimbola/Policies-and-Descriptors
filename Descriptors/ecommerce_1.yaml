@@ -1,6 +1,6 @@
-dataProductOwnerDisplayName: Paolo Platter
-projectOwner: user:paolo.platter_agilelab.it
-projectOwnerDisplayName: Paolo Platter
+dataProductOwnerDisplayName: Mario Rossi
+projectOwner: user:mario.rossi.italia.it
+projectOwnerDisplayName: Mario Rossi
 environment: development
 domain: customertouchpoint
 projectKind: system
@@ -9,16 +9,16 @@ domainId: urn:dmb:dmn:customertouchpoint
 id: urn:dmb:dp:customertouchpoint:ecommerce:0
 description: All major information around ecommerce operations
 devGroup: datameshplatform
-ownerGroup: paolo.platter_agilelab.it
-dataProductOwner: user:paolo.platter_agilelab.it
-email: paolo.platter@agilelab.it
+ownerGroup: mario.rossi_italia.it
+dataProductOwner: user:mario.rossi_italia.it
+email: mario.rossi@italia.it
 version: 0.5.0
 fullyQualifiedName: null
 name: Ecommerce
 informationSLA: 2BD
 maturity: Strategic
 useCaseTemplateId: urn:dmb:utm:dataproduct-template:0.0.0
-infrastructureTemplateId: urn:dmb:itm:cdp-aws-dataproduct-provisioner:1
+infrastructureTemplateId: urn:dmb:itm:cdp-aws-dataproduct-no-name:1
 billing: {}
 tags: [GDPR]
 specific: {}
@@ -46,7 +46,7 @@ components:
     id: urn:dmb:cmp:customertouchpoint:ecommerce:0:obsapi
     description: Observability API with Kensu
     useCaseTemplateId: urn:dmb:utm:observability-api:0.0.0
-    infrastructureTemplateId: urn:dmb:itm:workload-observability-provisioner:1
+    infrastructureTemplateId: urn:dmb:itm:workload-observability-no-name:1
     fullyQualifiedName: ObsAPI
     name: ObsAPI
     technology: AWS Lambda
@@ -63,7 +63,7 @@ components:
     name: Orders
     fullyQualifiedName: Orders
     version: 0.0.0
-    infrastructureTemplateId: urn:dmb:itm:aws-dremio-provisioner:1
+    infrastructureTemplateId: urn:dmb:itm:aws-dremio-no-name:1
     useCaseTemplateId: urn:dmb:utm:aws-dremio-template:0.0.0
     dependsOn: []
     platform: Dremio Cloud
@@ -143,7 +143,7 @@ components:
     name: Payments
     fullyQualifiedName: Payments
     version: 0.0.0
-    infrastructureTemplateId: urn:dmb:itm:aws-dremio-provisioner:1
+    infrastructureTemplateId: urn:dmb:itm:aws-dremio-no-name:1
     useCaseTemplateId: urn:dmb:utm:aws-dremio-template:0.0.0
     dependsOn: []
     platform: Dremio Cloud
@@ -221,7 +221,7 @@ components:
     id: urn:dmb:cmp:customertouchpoint:ecommerce:0:shop
     description: Shop
     useCaseTemplateId: urn:dmb:utm:dbt-kensu:0.0.0
-    infrastructureTemplateId: urn:dmb:itm:dbt-provisioner:1
+    infrastructureTemplateId: urn:dmb:itm:dbt-no-name:1
     fullyQualifiedName: Shop
     name: Shop
     technology: dbt
