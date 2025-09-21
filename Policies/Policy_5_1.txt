@@ -1,0 +1,1 @@
+If the product has a GDPR tag, at least one column must be PII-tagged; conversely, if any column has a PII tag, the product must have GDPR at DP level.

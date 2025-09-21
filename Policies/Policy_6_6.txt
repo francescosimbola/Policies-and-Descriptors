@@ -1,0 +1,1 @@
+A GDPR tag implies there is a right-to-be-forgotten deletion routine.

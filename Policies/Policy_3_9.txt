@@ -1,0 +1,1 @@
+Require that column tags expose at least one `businessTerms` consistent with domain and product; list every term and its total in suggestions.

@@ -1,0 +1,1 @@
+Compliance requires an operational data deletion process (right to be forgotten) whenever the product is tagged GDPR.

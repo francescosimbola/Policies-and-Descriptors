@@ -1,0 +1,1 @@
+All PII fields in the schema must include a tag whose fully qualified name is PII.

@@ -1,0 +1,1 @@
+Data products tagged GDPR must implement at least one deletion routine enforcing the right to be forgotten.

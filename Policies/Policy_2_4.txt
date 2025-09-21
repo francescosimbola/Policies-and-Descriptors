@@ -1,0 +1,15 @@
+Before any checks, enumerate all schema fields from every data contract.
+Each field must have:
+- `name` (optional)
+- `dataType` (optional)
+- `description` (required and non-empty)
+- `constraint` (optional)
+
+Apply these rules:
+1. If `description` exists, assume its format is correct.
+2. All fields must include a `description` key; missing key ⇒ error.
+3. Treat as empty only the literal `"description": ""`.
+4. Validate only the extracted fields; do not infer missing values or defaults.
+5. Non-empty `description` is considered properly formatted.
+
+Compliant ⇒ `satisfiesPolicy = true`; else `satisfiesPolicy = false` plus the list of missing fields.

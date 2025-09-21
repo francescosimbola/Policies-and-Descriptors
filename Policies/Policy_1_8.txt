@@ -1,0 +1,1 @@
+Policy is met when the data product provides three-plus implemented Great Expectations quality rules.

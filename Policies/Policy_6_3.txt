@@ -1,0 +1,1 @@
+Any GDPR-tagged product must expose at least one deletion process supporting the right to be forgotten.

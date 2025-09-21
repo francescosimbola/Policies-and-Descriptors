@@ -1,0 +1,1 @@
+GDPR-tagged data products must include at least one implemented data deletion procedure for the right to be forgotten.

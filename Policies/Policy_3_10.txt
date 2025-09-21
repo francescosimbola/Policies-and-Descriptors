@@ -1,0 +1,1 @@
+There must be at least one `businessTerms` in the column tags, coherent with domain and product purpose; in details -> suggestions list all terms found and their count.

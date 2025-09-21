@@ -1,0 +1,1 @@
+Both directions must hold: GDPR ⇒ some PII column, and PII column ⇒ GDPR at DP level.

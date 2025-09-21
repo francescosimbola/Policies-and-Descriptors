@@ -1,0 +1,1 @@
+Rule set: GDPR present ⇒ expect ≥1 PII column; any PII column ⇒ require GDPR tag at product level.

@@ -1,0 +1,1 @@
+Accept only pipelines orchestrated by Airflow with an end-of-ETL invocation of data contract guardian after contract refresh.

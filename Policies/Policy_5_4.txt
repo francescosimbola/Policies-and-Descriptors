@@ -1,0 +1,1 @@
+Consistency: presence of GDPR means some column is PII-tagged, and any PII-tagged column means the product is GDPR-tagged.

@@ -1,0 +1,1 @@
+Upon DAG termination, an Airflow task publishes the Data Product refreshed event to the shared bus.

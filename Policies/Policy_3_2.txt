@@ -1,0 +1,1 @@
+Require ≥1 `businessTerms` in column tags, aligned with domain and data product; output in suggestions the terms found and how many.

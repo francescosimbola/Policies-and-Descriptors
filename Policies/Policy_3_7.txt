@@ -1,0 +1,1 @@
+Expect at least one `businessTerms` key in column tags, coherent with domain and product scope; include terms and how many in suggestions.

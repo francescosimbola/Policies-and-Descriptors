@@ -1,0 +1,1 @@
+Mandate Airflow orchestration with a post-ETL call to the data contract guardian whenever contracts are refreshed.

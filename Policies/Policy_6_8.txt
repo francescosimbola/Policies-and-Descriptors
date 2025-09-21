@@ -1,0 +1,1 @@
+If GDPR is present, there must be at least one erase procedure enforcing the right to be forgotten.

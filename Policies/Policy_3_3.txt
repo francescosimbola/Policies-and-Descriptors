@@ -1,0 +1,1 @@
+Compliance demands at least one `businessTerms` at column level, relevant to the domain and use case; enumerate terms and total in suggestions.

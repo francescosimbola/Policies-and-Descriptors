@@ -1,0 +1,1 @@
+Require an Airflow orchestration module; upon completion of every ETL that updates contracts, call the data contract guardian routine.

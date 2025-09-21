@@ -1,0 +1,15 @@
+Extract every schema field per data contract before running validations.
+Per field, require:
+- `name` (optional)
+- `dataType` (optional)
+- `description` (required, not empty)
+- `constraint` (optional)
+
+Validation:
+1. When `description` exists, assume its format is correct.
+2. All fields must have a `description` key; absence ⇒ error.
+3. Empty means only the explicit `"description": ""` case.
+4. Validate exclusively the extracted fields—no inference or defaults.
+5. Non-empty `description` is accepted as correctly formatted.
+
+Output `satisfiesPolicy = true` if all checks pass; else `satisfiesPolicy = false` with missing fields enumerated.

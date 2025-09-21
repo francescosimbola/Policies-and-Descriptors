@@ -1,0 +1,1 @@
+Compliance requires that at least one data contract contains SLA information.

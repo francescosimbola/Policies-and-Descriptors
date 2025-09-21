@@ -1,0 +1,1 @@
+Expect to find an SLA in at least one data contract.

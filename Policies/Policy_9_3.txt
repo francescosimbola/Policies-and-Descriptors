@@ -1,0 +1,1 @@
+Compliance requires emitting the Data Product refreshed event on the shared bus at Airflow DAG completion.

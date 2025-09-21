@@ -1,0 +1,1 @@
+Column metadata should include one or more `businessTerms` appropriate to the domain and purpose; return the terms detected and the count.

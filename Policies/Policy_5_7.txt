@@ -1,0 +1,1 @@
+Ensure coherence: GDPR at DP level coexists with ≥1 PII column tag, and any PII tag mandates GDPR.
