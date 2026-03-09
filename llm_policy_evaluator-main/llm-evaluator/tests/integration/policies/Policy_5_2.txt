@@ -1,0 +1,1 @@
+Bidirectional rule: GDPR at product level ⇔ at least one column tagged PII.

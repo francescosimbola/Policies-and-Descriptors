@@ -1,0 +1,1 @@
+Compliant solutions are orchestrated with Airflow and invoke the data contract guardian at the end of contract-refresh ETL runs.

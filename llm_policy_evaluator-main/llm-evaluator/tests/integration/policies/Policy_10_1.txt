@@ -1,0 +1,1 @@
+Any schema field that represents PII must be tagged with FQN = PII.

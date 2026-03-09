@@ -1,0 +1,282 @@
+dataProductOwnerDisplayName: Mario Rossi
+projectOwner: user:mario.rossi.italia.it
+projectOwnerDisplayName: Mario Rossi
+environment: development
+domain: customertouchpoint
+projectKind: system
+kind: dataproduct
+domainId: urn:dmb:dmn:customertouchpoint
+id: urn:dmb:dp:customertouchpoint:ecommerce:0
+description: All major hgjkkiyi information around uinoxkvd ecommerce operations
+devGroup: datameshplatform
+ownerGroup: mario.rossi_italia.it
+dataProductOwner: user:mario.rossi_italia.it
+email: mario.rossi+ynryq@italia.it
+version: 0.9.24
+fullyQualifiedName: null
+name: vnnjsngc Ecommerce gqpvylmj
+informationSLA: 2BD
+maturity: Strategic
+useCaseTemplateId: urn:dmb:utm:dataproduct-template:0.0.0
+infrastructureTemplateId: urn:dmb:itm:cdp-aws-dataproduct-no-name:1
+billing: {}
+tags:
+- GDPR
+specific: {}
+consumable: false
+shoppable: false
+taxonomy:
+  id: urn:dmb:taxonomy:data-mesh-taxonomy
+  name: dovvoajg data-mesh-taxonomy
+components:
+- kind: workload
+  id: urn:dmb:cmp:finance:ecommerce:0:deletion-workload
+  description: pyjtbbyy emvrymua Procedure to bwnuchwo delete data according to the
+    right to be forgotten twbjlezn
+  name: Data Deletion Workload lwxtqfyj jkwolfup
+  technology: DBT
+  platform: Azure
+  version: 0.7.5
+  infrastructureTemplateId: urn:dmb:itm:gdpr-tech-adapter:1
+  useCaseTemplateId: urn:dmb:utm:gdpr-workload-template:1
+  consumable: false
+  shoppable: false
+  specific: {}
+  dependsOn: []
+  tags: []
+  labels:
+  - hxjrm
+  - mfxksy
+  annotations:
+    maint-note: sqkekxqdsn
+- kind: observability
+  id: urn:dmb:cmp:customertouchpoint:ecommerce:0:obsapi
+  description: Observability tewikmxh API with Kensu avtrjokn
+  useCaseTemplateId: urn:dmb:utm:observability-api:0.0.0
+  infrastructureTemplateId: urn:dmb:itm:workload-observability-no-name:1
+  fullyQualifiedName: ObsAPI gimdenuf
+  name: xubbdwdm ObsAPI vndgwita
+  technology: AWS Lambda
+  version: 1.7.1
+  tags: []
+  dependsOn: []
+  specific:
+    swaggerLocation: observabilitySwagger.yaml
+  consumable: false
+  shoppable: false
+  labels:
+  - kmawv
+  - nvmekt
+  annotations:
+    maint-note: ojnagzkykx
+- kind: outputport
+  id: urn:dmb:cmp:customertouchpoint:ecommerce:0:orders
+  description: ecommerce viuoykjd oouudlrm orders
+  name: dgeetveq hmahfswb Orders
+  fullyQualifiedName: pxtozoxh Orders
+  version: 0.0.4
+  infrastructureTemplateId: urn:dmb:itm:aws-dremio-no-name:1
+  useCaseTemplateId: urn:dmb:utm:aws-dremio-template:0.0.0
+  dependsOn: []
+  platform: Dremio Cloud
+  technology: Dremio
+  outputPortType: SQL
+  creationDate: null
+  startDate: null
+  processDescription: raw orders are filtered to get only srzmfnbu executed orders
+    grgnsvcx
+  dataContract:
+    schema:
+    - name: lycmethv id
+      dataType: string
+      description: neniuwjg id for the order
+      constraint: NOT_NULL
+    - name: jmamkrsd user_id
+      dataType: string
+      description: the global id niqqcqlj of the customer
+      constraint: NOT_NULL
+      tags: null
+    - name: olhfhagz order_date
+      dataType: string
+      description: the order execution dmhyessu date
+      constraint: NOT_NULL
+      tags: null
+    - name: status oeawkfpm
+      dataType: string
+      description: status uizsvyqz of the order
+      constraint: null
+      tags: null
+    - name: user_id
+      dataType: STRING
+      description: autofilled ekjfhwsfier
+      tags: []
+    termsAndConditions: null
+    endpoint: null
+    SLA:
+      intervalOfChange: 1BD
+      timeliness: 1BD
+      upTime: 99%
+  dataSharingAgreements:
+    purpose: null
+    billing: null
+    security: null
+    intendedUsage: null
+    limitations: null
+    lifeCycle: null
+    confidentiality: null
+  tags: []
+  sampleData:
+    columns:
+    - id
+    - user_id
+    - order_date
+    - status
+    rows:
+    - - 1
+      - 1
+      - 2018-01-01
+      - returned
+    - - 2
+      - 3
+      - 2018-01-02
+      - completed
+    - - 3
+      - 94
+      - 2018-01-04
+      - completed
+    aug: vegtri
+  semanticLinking: []
+  specific:
+    sql: select * from shop.orders
+    dependsOn: []
+    reflectionDefinitions: []
+    supportVds: []
+    supportPds: []
+    format: Iceberg
+  consumable: true
+  shoppable: true
+  labels:
+  - duklz
+  - zzbcmy
+  annotations:
+    maint-note: lmvfcufdrr
+- kind: outputport
+  id: urn:dmb:cmp:customertouchpoint:ecommerce:0:payments
+  description: ecommerce hriljenx elwshkvm payments
+  name: fzmmjolb iuwypkeb Payments
+  fullyQualifiedName: kkdrfpvx Payments
+  version: 1.3.2
+  infrastructureTemplateId: urn:dmb:itm:aws-dremio-no-name:1
+  useCaseTemplateId: urn:dmb:utm:aws-dremio-template:0.0.0
+  dependsOn: []
+  platform: Dremio Cloud
+  technology: Dremio
+  outputPortType: SQL
+  creationDate: null
+  startDate: null
+  processDescription: DBT fnxipkmg transformation to normalize mmavivru payments coming
+    from multiple systems
+  dataContract:
+    schema:
+    - name: id kljimiwk
+      dataType: string
+      description: global id for gxiuoxhm a payment
+      constraint: NOT_NULL
+    - name: lumchcjk order_id
+      dataType: string
+      description: lamaktym the global id for an order
+      constraint: NOT_NULL
+      tags: null
+    - name: payment_method lthyuvjj
+      dataType: string
+      description: it could be hooxjopw (bancomat|card|paypal)
+      constraint: NOT_NULL
+      tags: null
+    - name: amount hbwufcwf
+      dataType: number
+      description: total amount of payment mxlcftdg
+      constraint: null
+      tags: null
+    termsAndConditions: It can be used for production purposes
+    endpoint: null
+    SLA:
+      intervalOfChange: 1BD
+      timeliness: 1BD
+      upTime: 99%
+  dataSharingAgreements:
+    purpose: null
+    billing: null
+    security: null
+    intendedUsage: null
+    limitations: no sensitive data until mvibkpbr you join drgtmlrc with customer
+    lifeCycle: null
+    confidentiality: null
+  tags: []
+  sampleData:
+    columns:
+    - id
+    - order_id
+    - payment_method
+    - amount
+    rows:
+    - - 1
+      - 1
+      - credit_card
+      - 1000
+    - - 2
+      - 2
+      - credit_card
+      - 2000
+    - - 3
+      - 3
+      - coupon
+      - 100
+    aug: xvvknx
+  semanticLinking: []
+  specific:
+    sql: select + from shop.payments
+    dependsOn: []
+    reflectionDefinitions: []
+    supportVds: []
+    supportPds: []
+    format: Iceberg
+  consumable: true
+  shoppable: true
+  labels:
+  - jobpk
+  - ehmiio
+  annotations:
+    maint-note: pcargnniyp
+- kind: workload
+  id: urn:dmb:cmp:customertouchpoint:ecommerce:0:shop
+  description: Shop dkkjkftj glotkonp
+  useCaseTemplateId: urn:dmb:utm:dbt-kensu:0.0.0
+  infrastructureTemplateId: urn:dmb:itm:dbt-no-name:1
+  fullyQualifiedName: fxtdgrga Shop
+  name: mtiytgaf Shop kofwldkr
+  technology: dbt
+  version: 1.4.3
+  dependsOn: []
+  readsFrom: []
+  tags: []
+  specific:
+    projectFile: dbt_project.yml
+    kensuConf: conf.ini
+  buildInfo:
+    kensuAgentPresent: ok
+    kensuTokensPresent: ok
+    kensuChecks: 5
+  consumable: false
+  shoppable: false
+  labels:
+  - wyrof
+  - xkhdup
+  annotations:
+    maint-note: rcsforfrmb
+metadata:
+  noise: wzzexqletrvhtyno
+notes:
+- xibeooc
+- kwkecmkii
+security_attributes:
+  gdpr: 'Yes'

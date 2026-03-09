@@ -1,0 +1,1 @@
+Acceptance criterion: at least three Great Expectations checks are implemented in the data product.

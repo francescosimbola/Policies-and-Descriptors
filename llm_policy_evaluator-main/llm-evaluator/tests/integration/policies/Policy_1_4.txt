@@ -1,0 +1,1 @@
+A valid data product implements a minimum of three Great Expectations-based quality checks.

@@ -1,0 +1,1 @@
+To comply, the data product must implement at least three data quality checks using the Great Expectations framework.

@@ -1,0 +1,1 @@
+When the Airflow DAG completes, an event must be emitted to the shared bus invoking Data Product refreshed.

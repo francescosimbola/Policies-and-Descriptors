@@ -1,0 +1,1 @@
+Whenever PII is present, ensure the data product is tagged GDPR.

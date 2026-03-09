@@ -1,0 +1,1302 @@
+dataProductOwnerDisplayName: Mario Rossi (v9)
+projectOwner: user:mario.rossi.italia.it
+projectOwnerDisplayName: Mario Rossi (v9)
+environment: development
+domain: finance
+projectKind: system
+kind: dataproduct
+domainId: urn:dmb:dmn:finance
+id: urn:dmb:dp:finance:cashflow:0
+description: doxecvdt This sdrzhaaq represents all the operating cashflows generating
+  incoming or outgoing liquidity (v9)
+devGroup: datameshplatform
+ownerGroup: mario.rossi_italia.it
+dataProductOwner: user:mario.rossi_italia.it
+email: mario.rossi+cutup@italia.it
+version: 0.9.15
+fullyQualifiedName: Liquidity guppldqb Cash Flows (v9)
+name: liakpevk CashFlow (v9)
+informationSLA: null
+maturity: Strategic
+useCaseTemplateId: urn:dmb:utm:dataproduct-template:0.0.0
+infrastructureTemplateId: urn:dmb:itm:cdp-aws-dataproduct-no-name:1
+billing: {}
+tags:
+- Analytics
+- Finance
+- GDPR
+- CashOps
+specific: {}
+business_attributes:
+  valueProposition: Cash flow records related to customer purchases.
+  okr: Increase alxkoean the CLV
+  pricingType: Pay Per Use
+  stakeholderRoles:
+  - CRO
+  - CFO
+security_attributes:
+  visibility: Global
+  confidentiality: bauwbfjm Confidential
+  gdpr: 'Yes'
+consumable: false
+shoppable: false
+taxonomy:
+  id: urn:dmb:taxonomy:data-mesh-taxonomy
+  name: vvvxhmlv data-mesh-taxonomy
+components:
+- kind: workload
+  id: urn:dmb:cmp:finance:cashflow:0:deletion-workload
+  description: Procedure to delete data gosvrkyw according to the right gkvrgkfc to
+    be forgotten (v9)
+  name: vuqyycrg Data Deletion Workload (v9)
+  technology: DBT
+  platform: Azure
+  version: 0.13.13
+  infrastructureTemplateId: urn:dmb:itm:gdpr-tech-adapter:1
+  useCaseTemplateId: urn:dmb:utm:gdpr-workload-template:1
+  consumable: false
+  shoppable: false
+  specific:
+    note: cfg-v9 pvqfffxr
+  dependsOn: []
+  tags: []
+  labels:
+  - xrvwj
+  - ydkfey
+  annotations:
+    owner-note: bogtwcjjmc
+- kind: outputport
+  id: urn:dmb:cmp:finance:cashflow:0:cashflow-outputpor
+  description: A Kafka based Output roqensmn Port with data contract (v9)
+  name: CashFlow OutputPort vfnjyujf (v9)
+  fullyQualifiedName: null
+  version: 1.0.18
+  infrastructureTemplateId: urn:dmb:itm:data-contract-kafka-tech-adapter:1
+  useCaseTemplateId: urn:dmb:utm:kafka-outputport-datacontract-template:1
+  __dataContractEnabled: true
+  consumable: false
+  shoppable: false
+  dependsOn: []
+  platform: Confluent
+  technology: Kafka
+  outputPortType: event
+  creationDate: null
+  startDate: null
+  processDescription: null
+  dataContract:
+    settings:
+      ingestionMode: PUSH
+      onBrokenContract: CIRCUIT_BREAK
+      icon: https://italia.png
+    schema:
+    - name: ID xvhzbmzc
+      dataType: string
+      tags: []
+      businessTerms:
+      - tagFQN: CashFlowDirection
+        source: Glossary
+        labelType: Manual
+        state: Confirmed
+    - name: jubdqcef Direction
+      dataType: string
+      tags: []
+      businessTerms:
+      - tagFQN: CashFlowDirection
+        source: Glossary
+        labelType: Manual
+        state: Confirmed
+    - name: Amount jmvjkdux
+      dataType: number
+      tags:
+      - tagFQN: Confidential
+        source: Tag
+        labelType: Manual
+        state: Confirmed
+      businessTerms: []
+    termsAndConditions: ' '
+    endpoint: null
+    SLA:
+      intervalOfChange: 1 minute
+      timeliness: 1 minute
+      upTime: 99%
+    dataQualityExpectations:
+    - kwargs:
+      - key: Column
+        value: ID
+      meta:
+        category: validity
+        description: id not wrynbfey null
+      expectationType: expect_column_values_to_not_be_null
+      framework: Great Expectations
+    - kwargs:
+      - key: Column
+        value: Amount
+      meta:
+        category: validity
+        description: amount tdflvtjo not null
+      expectationType: expect_column_values_to_not_be_null
+      framework: Great Expectations
+    - kwargs:
+      - key: Column
+        value: Direction
+      meta:
+        category: validity
+        description: direction not null fzzsrkwl
+      expectationType: expect_column_values_to_not_be_null
+      framework: Great Expectations
+  dataSharingAgreement:
+    purpose: ' kxnztfoa'
+    billing: ''
+    security: ''
+    intendedUsage: ' hgwtszrc'
+    limitations: ' wmtjeyxw'
+    lifeCycle: ' qyxbjhwu'
+    confidentiality: ' ndbcuifh'
+  tags: []
+  sampleData: null
+  semanticLinking: []
+  components:
+  - fullyQualifiedName: null
+    description: A Kafka based Output Port with data contract qdxasleo (v9)
+    version: 0.6.1
+    useCaseTemplateId: urn:dmb:utm:kafka-outputport-datacontract-template:1
+    platform: Confluent
+    technology: Kafka
+    outputPortType: event
+    creationDate: null
+    startDate: null
+    processDescription: null
+    dataContract:
+      settings:
+        ingestionMode: PUSH
+        onBrokenContract: CIRCUIT_BREAK
+        icon: https://italia.png
+      schema:
+      - name: yajndmjw ID
+        dataType: string
+        tags: []
+        businessTerms:
+        - tagFQN: CashFlowDirection
+          source: Glossary
+          labelType: Manual
+          state: Confirmed
+      - name: yxcwjonh Direction
+        dataType: string
+        tags: []
+        businessTerms:
+        - tagFQN: CashFlowDirection
+          source: Glossary
+          labelType: Manual
+          state: Confirmed
+      - name: zinpkvoq Amount
+        dataType: number
+        tags:
+        - tagFQN: Confidential
+          source: Tag
+          labelType: Manual
+          state: Confirmed
+        businessTerms: []
+      termsAndConditions: ''
+      endpoint: null
+      SLA:
+        intervalOfChange: 1 minute
+        timeliness: 1 minute
+        upTime: 99%
+      dataQualityExpectations:
+      - kwargs:
+        - key: Column
+          value: ID
+        meta:
+          category: validity
+          description: zuvryinx id not null
+        expectationType: expect_column_values_to_not_be_null
+      - kwargs:
+        - key: Column
+          value: ID
+        meta:
+          category: validity
+          description: xqynvnfc id not null
+        expectationType: expect_column_values_to_not_be_null
+        framework: Great Expectations
+      - kwargs:
+        - key: Column
+          value: ID
+        meta:
+          category: validity
+          description: id not null idzbprkl
+        expectationType: expect_column_values_to_not_be_null
+        framework: Great Expectations
+    dataSharingAgreement:
+      purpose: ' ldjzudfy'
+      billing: ''
+      security: ''
+      intendedUsage: ' cirardxz'
+      limitations: ' iyjpvrqg'
+      lifeCycle: ' offyelne'
+      confidentiality: ' eetwnpuk'
+    tags: []
+    sampleData: null
+    semanticLinking: []
+    name: Landing zjaplove Topic (v9)
+    kind: storage
+    infrastructureTemplateId: urn:dmb:itm:data-contract-kafka-tech-adapter:1
+    consumable: false
+    shoppable: false
+    spec:
+      cluster: Finance
+      topicName: landing-topic
+    id: urn:dmb:cmp:finance:cashflow:0:cashflow-outputpor:Landing Topic
+  - fullyQualifiedName: null
+    description: A kywyovtn Kafka based Output Port with data contract (v9)
+    version: 0.19.7
+    useCaseTemplateId: urn:dmb:utm:kafka-outputport-datacontract-template:1
+    platform: Confluent
+    technology: Kafka
+    outputPortType: event
+    creationDate: null
+    startDate: null
+    processDescription: null
+    dataContract:
+      settings:
+        ingestionMode: PUSH
+        onBrokenContract: CIRCUIT_BREAK
+        icon: https://italia.png
+      schema:
+      - name: nxtybyla ID
+        dataType: string
+        tags: []
+        businessTerms:
+        - tagFQN: CashFlowDirection
+          source: Glossary
+          labelType: Manual
+          state: Confirmed
+      - name: Direction gzuhzhby
+        dataType: string
+        tags: []
+        businessTerms:
+        - tagFQN: CashFlowDirection
+          source: Glossary
+          labelType: Manual
+          state: Confirmed
+      - name: wotfmbda Amount
+        dataType: number
+        tags:
+        - tagFQN: Confidential
+          source: Tag
+          labelType: Manual
+          state: Confirmed
+        businessTerms: []
+      termsAndConditions: ''
+      endpoint: null
+      SLA:
+        intervalOfChange: 1 minute
+        timeliness: 1 minute
+        upTime: 99%
+      dataQualityExpectations:
+      - kwargs:
+        - key: Column
+          value: ID
+        meta:
+          category: validity
+          description: id txtaehfk not null
+        expectationType: expect_column_values_to_not_be_null
+      - kwargs:
+        - key: Column
+          value: ID
+        meta:
+          category: validity
+          description: ccsrtahq id not null
+        expectationType: expect_column_values_to_not_be_null
+        framework: Great Expectations
+      - kwargs:
+        - key: Column
+          value: ID
+        meta:
+          category: validity
+          description: id not null fskqdjjv
+        expectationType: expect_column_values_to_not_be_null
+        framework: Great Expectations
+    dataSharingAgreement:
+      purpose: ' mphuycdw'
+      billing: ''
+      security: ''
+      intendedUsage: ' lxebyplp'
+      limitations: ' rtrcxhdq'
+      lifeCycle: ' kaxdvmxp'
+      confidentiality: ' qyckrnhd'
+    tags: []
+    sampleData: null
+    semanticLinking: []
+    name: gmpwdgbi Compliant Topic (v9)
+    kind: outputport
+    infrastructureTemplateId: urn:dmb:itm:data-contract-kafka-tech-adapter:1
+    consumable: true
+    shoppable: true
+    spec:
+      cluster: Finance
+      topicName: compliant-topic
+    id: urn:dmb:cmp:finance:cashflow:0:cashflow-outputpor:Compliant Topic
+  - fullyQualifiedName: null
+    description: A Kafka based Output Port with data contract (v9) rsmfrvkw
+    version: 1.13.12
+    useCaseTemplateId: urn:dmb:utm:kafka-outputport-datacontract-template:1
+    platform: Confluent
+    technology: Kafka
+    outputPortType: event
+    creationDate: null
+    startDate: null
+    processDescription: null
+    dataContract:
+      settings:
+        ingestionMode: PUSH
+        onBrokenContract: CIRCUIT_BREAK
+        icon: https://italia.png
+      schema:
+      - name: ID gfywpiwt
+        dataType: string
+        tags: []
+        businessTerms:
+        - tagFQN: CashFlowDirection
+          source: Glossary
+          labelType: Manual
+          state: Confirmed
+      - name: mqsulhev Direction
+        dataType: string
+        tags: []
+        businessTerms:
+        - tagFQN: CashFlowDirection
+          source: Glossary
+          labelType: Manual
+          state: Confirmed
+      - name: dryksduv Amount
+        dataType: number
+        tags:
+        - tagFQN: Confidential
+          source: Tag
+          labelType: Manual
+          state: Confirmed
+        businessTerms: []
+      termsAndConditions: ''
+      endpoint: null
+      SLA:
+        intervalOfChange: 1 minute
+        timeliness: 1 minute
+        upTime: 99%
+      dataQualityExpectations:
+      - kwargs:
+        - key: Column
+          value: ID
+        meta:
+          category: validity
+          description: id not sctnwfco null
+        expectationType: expect_column_values_to_not_be_null
+      - kwargs:
+        - key: Column
+          value: ID
+        meta:
+          category: validity
+          description: id not kginrewa null
+        expectationType: expect_column_values_to_not_be_null
+        framework: Great Expectations
+      - kwargs:
+        - key: Column
+          value: ID
+        meta:
+          category: validity
+          description: id yrqgrcjc not null
+        expectationType: expect_column_values_to_not_be_null
+        framework: Great Expectations
+    dataSharingAgreement:
+      purpose: ' vloseyes'
+      billing: ''
+      security: ''
+      intendedUsage: ' inxrwdir'
+      limitations: ' kummvbvk'
+      lifeCycle: ' bzfpghpw'
+      confidentiality: ' oxgyktmp'
+    tags: []
+    sampleData: null
+    semanticLinking: []
+    name: Dead Letter acbisdim Topic (v9)
+    kind: storage
+    infrastructureTemplateId: urn:dmb:itm:data-contract-kafka-tech-adapter:1
+    consumable: false
+    shoppable: false
+    spec:
+      cluster: Finance
+      topicName: dead-letter-topic
+    id: urn:dmb:cmp:finance:cashflow:0:cashflow-outputpor:Dead Letter Topic
+  - fullyQualifiedName: null
+    description: A Kafka based Output Port with qnqlvsru data contract (v9)
+    version: 1.20.8
+    useCaseTemplateId: urn:dmb:utm:kafka-outputport-datacontract-template:1
+    platform: Confluent
+    technology: Kafka
+    outputPortType: event
+    creationDate: null
+    startDate: null
+    processDescription: null
+    dataContract:
+      settings:
+        ingestionMode: PUSH
+        onBrokenContract: CIRCUIT_BREAK
+        icon: https://italia.png
+      schema:
+      - name: iptfikpr ID
+        dataType: string
+        tags: []
+        businessTerms:
+        - tagFQN: CashFlowDirection
+          source: Glossary
+          labelType: Manual
+          state: Confirmed
+      - name: Direction zncxzeqg
+        dataType: string
+        tags: []
+        businessTerms:
+        - tagFQN: CashFlowDirection
+          source: Glossary
+          labelType: Manual
+          state: Confirmed
+      - name: Amount lgnvigye
+        dataType: number
+        tags:
+        - tagFQN: Confidential
+          source: Tag
+          labelType: Manual
+          state: Confirmed
+        businessTerms: []
+      termsAndConditions: ''
+      endpoint: null
+      SLA:
+        intervalOfChange: 1 minute
+        timeliness: 1 minute
+        upTime: 99%
+      dataQualityExpectations:
+      - kwargs:
+        - key: Column
+          value: ID
+        meta:
+          category: validity
+          description: id gprnjirt not null
+        expectationType: expect_column_values_to_not_be_null
+      - kwargs:
+        - key: Column
+          value: ID
+        meta:
+          category: validity
+          description: id not vtuixaoc null
+        expectationType: expect_column_values_to_not_be_null
+        framework: Great Expectations
+      - kwargs:
+        - key: Column
+          value: ID
+        meta:
+          category: validity
+          description: id not iiqsttcz null
+        expectationType: expect_column_values_to_not_be_null
+        framework: Great Expectations
+    dataSharingAgreement:
+      purpose: ' wpwuphsf'
+      billing: ''
+      security: ''
+      intendedUsage: ' aolovkwm'
+      limitations: ' knsmcgvf'
+      lifeCycle: ' kgyrhumu'
+      confidentiality: ' oiwnryii'
+    tags: []
+    sampleData: null
+    semanticLinking: []
+    name: Guardian swgmhjhl (v9)
+    kind: workload
+    infrastructureTemplateId: urn:dmb:itm:data-contract-kafka-tech-adapter:1
+    consumable: false
+    shoppable: false
+    spec:
+      cluster: Finance
+      landingTopicName: landing-topic
+      deadLetterTopicName: dead-letter-topic
+      compliantTopicName: compliant-topic
+    __dataContractGuardianSpec:
+      guards:
+      - dataContractId: urn:dmb:cmp:finance:cashflow:0:cashflow-outputpor
+    dependsOn:
+    - urn:dmb:cmp:finance:cashflow:0:cashflow-outputpor:Landing Topic
+    - urn:dmb:cmp:finance:cashflow:0:cashflow-outputpor:Dead Letter Topic
+    - urn:dmb:cmp:finance:cashflow:0:cashflow-outputpor:Compliant Topic
+    id: urn:dmb:cmp:finance:cashflow:0:cashflow-outputpor:Guardian
+  labels:
+  - drtcv
+  - yupmtu
+  annotations:
+    owner-note: vltustgplw
+- kind: workload
+  id: urn:dmb:cmp:finance:cashflow:0:cashflows-calculation
+  description: wzkxudmn It calculates oqqebtaq the cashflows starting from all the
+    deals in input (v9)
+  useCaseTemplateId: urn:dmb:utm:dbt-standard:0.0.0
+  infrastructureTemplateId: urn:dmb:itm:dbt-no-name:1
+  fullyQualifiedName: CashFlows Calculation chuogbov
+  name: ynhrekmi CashFlows Calculation (v9)
+  technology: dbt
+  version: 2.16.14
+  dependsOn:
+  - urn:dmb:cmp:finance:cashflow:0:snowflake-component
+  readsFrom: []
+  tags: []
+  specific:
+    projectFile: dbt_project.yml
+    note: cijdstxz cfg-v9
+  consumable: false
+  shoppable: false
+  labels:
+  - ocmcg
+  - bryqos
+  annotations:
+    owner-note: rtqijtiajp
+- kind: outputport
+  id: urn:dmb:cmp:finance:cashflow:0:full-cashflows-sql
+  description: list fdnfieha of current and future cashflows. This pyvujdcw is a rolling
+    window of cashflows that allows to time travel on it (v9)
+  name: Full qxdoonvx CashFlows SQL (v9)
+  fullyQualifiedName: All CashFlows ekcifszm SQL
+  version: 1.1.6
+  infrastructureTemplateId: urn:dmb:itm:aws-dremio-no-name:1
+  useCaseTemplateId: urn:dmb:utm:aws-dremio-template:0.0.0
+  dependsOn: []
+  platform: Dremio Cloud
+  technology: Dremio
+  outputPortType: SQL
+  creationDate: null
+  startDate: null
+  processDescription: collecting cashflows from all the deal and finance instruments
+    that actually generate a cashflow, normalize and harmonize them
+  dataContract:
+    schema:
+    - name: zjiorcdy counterpartyId
+      dataType: string
+      description: global msbikufh addressable identifier for a counterparty. The
+        counterparty can be a customer or a third party (supplier, market, rfgqpobi
+        institution, etc)
+      constraint: NOT_NULL
+      businessTerms:
+      - tagFQN: CashFlowDirection
+        source: Glossary
+        labelType: Manual
+        state: Confirmed
+    - name: vucobfei productId
+      dataType: string
+      description: the global id jmpqfknz of the product anagrafic
+      constraint: NOT_NULL
+      tags: []
+    - name: dealId dqrhnqap
+      dataType: string
+      description: the global id of adxkjpzs the deal
+      constraint: NOT_NULL
+      tags: []
+    - name: currency kyzyjaqp
+      dataType: string
+      description: currency of savkbimp the cashflow
+      constraint: null
+      tags: []
+    - name: accounting_period gfejslef
+      dataType: string
+      description: the reference accounting period the cashflow psupdnzw is applied
+        to
+      constraint: null
+      tags: []
+    - name: direction hxbgvpoo
+      dataType: string
+      description: the direction of the pcsyqfos cashflow - Incoming/Outgoing
+      constraint: null
+      tags:
+      - tagFQN: CashFlowDirection
+        source: Glossary
+        labelType: Derived
+        state: Confirmed
+    - name: reference_date zefynpir
+      dataType: date
+      description: when the cash will be efzypcld materialized
+      constraint: null
+      tags: []
+    - name: amount pcapiikb
+      dataType: number
+      description: the amount of duvobpdi incoing/outgoing cash, according to the
+        direction
+      constraint: null
+      tags: []
+    - name: snozjqbh type
+      dataType: string
+      description: type of cashflow, if it is actual or hkdreljo forecasted
+      constraint: null
+      tags: []
+    - name: fsiprfzl last_update
+      dataType: date
+      description: type of cashflow, if vvlkmjbu it is actual or forecasted
+      constraint: null
+      tags: []
+    termsAndConditions: 'It can be used for production purposes '
+    endpoint: null
+    SLA:
+      intervalOfChange: '2 day   '
+      timeliness: 2 day
+      upTime: 99.9%
+    dataQualityExpectations:
+    - kwargs:
+      - key: Column
+        value: ID
+      meta:
+        category: validity
+        description: id not null
+      expectationType: expect_column_values_to_not_be_null
+      framework: Great Expectations
+    - kwargs:
+      - key: Column
+        value: ID
+      meta:
+        category: validity
+        description: id not null
+      expectationType: expect_column_values_to_not_be_null
+      framework: Great Expectations
+    - kwargs:
+      - key: Column
+        value: ID
+      meta:
+        category: validity
+        description: id not null
+      expectationType: expect_column_values_to_not_be_null
+      framework: Great Expectations
+  dataSharingAgreement:
+    purpose: this is the foundation for all the liquidity gnsqlfiv use cases omaybodf
+    billing: null
+    security: null
+    intendedUsage: txrqmaac this should be used uarwejae for regulatory and balance
+      sheet purposes
+    limitations: no sensitive data until atuhlvdd you join with customer
+    lifeCycle: data is loaded daily ogzjgomz and tipically never deleted
+    confidentiality: null
+  tags: []
+  sampleData:
+    columns:
+    - customerId
+    - productId
+    - dealId
+    - currency
+    - accounting_period
+    - direction
+    - reference_date
+    - Amount
+    - Type
+    - last_update
+    rows:
+    - - 1
+      - 1
+      - 1
+      - EUR
+      - Q1
+      - Incoming
+      - 10-06-2022
+      - 10000
+      - forecast
+      - 10-06-2022
+    - - 1
+      - 2
+      - 4
+      - EUR
+      - Q1
+      - Outgoing
+      - 10-08-2022
+      - 5000
+      - actual
+      - 10-06-2022
+    - - 1
+      - 2
+      - 4
+      - EUR
+      - Q1
+      - Outgoing
+      - 10-09-2022
+      - 5000
+      - actual
+      - 10-06-2022
+    note: pzdpjbfb aug-v9
+  semanticLinking:
+  - fieldName: customerId
+    referenceOutputPort: urn:dmb:cmp:customer:customer:1:customer_s3_port
+    referenceFieldName: customerId
+  - fieldName: productId
+    referenceOutputPort: urn:dmb:cmp:finance:products:1:products_s3_port
+    referenceFieldName: productId
+  - fieldName: dealId
+    referenceOutputPort: urn:dmb:cmp:commercial:deals:1:deals_s3_port
+    referenceFieldName: dealId
+  specific:
+    sql: '> SELECT c.company_name as name, ''company'' as type from companies c union
+      all select p.name as name, ''person'' as type from persons p'
+    dependsOn: []
+    reflectionDefinitions: []
+    supportVds: []
+    supportPds: []
+    format: Iceberg
+    note: cfg-v9 tcowwznd
+  approvals:
+  - mario.rossi_italia.it
+  consumable: true
+  shoppable: true
+  labels:
+  - iogap
+  - rqxroi
+  annotations:
+    owner-note: aejcmoylrj
+- kind: storage
+  id: urn:dmb:cmp:finance:cashflow:0:logical-schema
+  description: This blogjmtb component references a logical model on Ellie.AI (v9)
+  name: Logical Model (v9) xwvteull
+  fullyQualifiedName: null
+  version: 2.7.18
+  infrastructureTemplateId: urn:dmb:itm:aws-storage-s3-no-name:0
+  useCaseTemplateId: urn:dmb:utm:aws-storage-s3-template:0.0.0
+  dependsOn: []
+  platform: Ellie.AI
+  tags: []
+  specific:
+    Username: user3464@ellie.ai
+    Password: ^a\cc[ZR
+    ellieai:
+      spec:
+        model:
+          modelId: 16719
+          name: Banking Account LM (do not delete, it's zycrczbe a showcase)
+          description: ' gjaxtynl'
+          progressStatus: work-in-progress
+          level: logical
+          createdAt: 2023-11-10 10:52:35.263000+00:00
+          updatedAt: 2023-11-10 17:51:30.057000+00:00
+          entities:
+          - id: 420b573e-7fb7-11ee-bbeb-0242ac1e0003
+            name: Bank Account pcgdurbp
+            attributes:
+            - id: 420df570-7fb7-11ee-bbeb-0242ac1e0003
+              name: accountNumber jlnezhcp
+              order: 0
+              metadata:
+                FK: false
+                PK: true
+              created_at: 2023-11-10 10:52:35.263677
+              updated_at: 2023-11-10 10:52:35.263677
+            - id: 289b291a-7fbb-11ee-8cdb-0242ac1e0003
+              name: molfxeji balance
+              order: 1
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:20:31.144087
+              updated_at: 2023-11-10 11:20:31.144087
+            - id: 289bd194-7fbb-11ee-8cdb-0242ac1e0003
+              name: ewzjhqry status
+              order: 2
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:20:31.144087
+              updated_at: 2023-11-10 11:20:31.144087
+            - id: 289c7536-7fbb-11ee-8cdb-0242ac1e0003
+              name: owner qnfrvtrn
+              order: 3
+              metadata:
+                FK: true
+                PK: false
+              created_at: 2023-11-10 11:20:31.144087
+              updated_at: 2023-11-10 11:20:31.144087
+            - id: 289cfa7e-7fbb-11ee-8cdb-0242ac1e0003
+              name: ywfvjnjb type
+              order: 4
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:20:31.144087
+              updated_at: 2023-11-10 11:20:31.144087
+            createdAt: 2023-11-10 10:52:35.263000+00:00
+            updatedAt: 2023-11-10 11:20:35.557000+00:00
+            metadata:
+              links:
+              - id: 3ce97af7-aaf3-977b-4806-829bfed94b56
+                name: Bank nujppyth Account
+                level: level-link
+                linkedEntityType: conceptual
+          - id: 421c65e2-7fb7-11ee-bbeb-0242ac1e0003
+            name: Bank rbfsddnl Customer
+            attributes:
+            - id: dc0f4b80-7fba-11ee-95e0-0242ac1e0003
+              name: id eswxjxjv
+              order: 0
+              metadata:
+                FK: true
+                PK: true
+              created_at: 2023-11-10 11:18:22.761014
+              updated_at: 2023-11-10 11:18:22.761014
+            - id: dc0fb9da-7fba-11ee-95e0-0242ac1e0003
+              name: firstName llnxtfaz
+              order: 1
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:18:22.761014
+              updated_at: 2023-11-10 11:18:22.761014
+            - id: dc100304-7fba-11ee-95e0-0242ac1e0003
+              name: jyhqcmoo lastName
+              order: 2
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:18:22.761014
+              updated_at: 2023-11-10 11:18:22.761014
+            - id: dc10516a-7fba-11ee-95e0-0242ac1e0003
+              name: SSN zfmpqhjl
+              order: 3
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:18:22.761014
+              updated_at: 2023-11-10 11:18:22.761014
+            createdAt: 2023-11-10 10:52:35.263000+00:00
+            updatedAt: 2023-11-10 11:18:26.338000+00:00
+            metadata:
+              links:
+              - id: 9ac29433-c4ba-dc68-4545-83aec056ac27
+                name: Bank udkbsfnd Customer
+                level: level-link
+                linkedEntityType: conceptual
+          - id: 4227322e-7fb7-11ee-bbeb-0242ac1e0003
+            name: nxboqsfs Bank Transaction
+            attributes:
+            - id: 038a12da-7fbb-11ee-a595-0242ac1e0003
+              name: koynnqpl TRN
+              order: 0
+              metadata:
+                FK: false
+                PK: true
+              created_at: 2023-11-10 11:19:28.994027
+              updated_at: 2023-11-10 11:19:28.994027
+            - id: 038ab3ca-7fbb-11ee-a595-0242ac1e0003
+              name: account unfdccaz
+              order: 1
+              metadata:
+                FK: true
+                PK: false
+              created_at: 2023-11-10 11:19:28.994027
+              updated_at: 2023-11-10 11:19:28.994027
+            - id: 038b4268-7fbb-11ee-a595-0242ac1e0003
+              name: type xandyley
+              order: 2
+              metadata:
+                FK: true
+                PK: false
+              created_at: 2023-11-10 11:19:28.994027
+              updated_at: 2023-11-10 11:19:28.994027
+            - id: 038bc3b4-7fbb-11ee-a595-0242ac1e0003
+              name: amount ezakvnze
+              order: 3
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:19:28.994027
+              updated_at: 2023-11-10 11:19:28.994027
+            - id: 038c1b0c-7fbb-11ee-a595-0242ac1e0003
+              name: lnvrxbuo description
+              order: 4
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:19:28.994027
+              updated_at: 2023-11-10 11:19:28.994027
+            - id: 038c9406-7fbb-11ee-a595-0242ac1e0003
+              name: blivaqqs status
+              order: 5
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:19:28.994027
+              updated_at: 2023-11-10 11:19:28.994027
+            - id: 038d0008-7fbb-11ee-a595-0242ac1e0003
+              name: lovjmkee currency
+              order: 6
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:19:28.994027
+              updated_at: 2023-11-10 11:19:28.994027
+            - id: 038d6106-7fbb-11ee-a595-0242ac1e0003
+              name: date ukxosuls
+              order: 7
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:19:28.994027
+              updated_at: 2023-11-10 11:19:28.994027
+            - id: 038de8c4-7fbb-11ee-a595-0242ac1e0003
+              name: fee mjzbvypr
+              order: 8
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:19:28.994027
+              updated_at: 2023-11-10 11:19:28.994027
+            createdAt: 2023-11-10 10:52:35.263000+00:00
+            updatedAt: 2023-11-10 11:19:28.994000+00:00
+            metadata:
+              links:
+              - id: 0fd9ef22-7048-4b95-475f-8495d1ead33f
+                name: Bank Transaction qspamxuz
+                level: level-link
+                linkedEntityType: conceptual
+          - id: 4214efd8-7fb7-11ee-bbeb-0242ac1e0003
+            name: Checking qncepmbp Account
+            attributes: []
+            createdAt: 2023-11-10 10:52:35.263000+00:00
+            updatedAt: 2023-11-10 10:52:35.263000+00:00
+            metadata:
+              links:
+              - id: 63859b4c-70a0-0772-4b04-8f6c1ac3ec12
+                name: Checking hguqlhea Account
+                level: level-link
+                linkedEntityType: conceptual
+          - id: 422a1aca-7fb7-11ee-bbeb-0242ac1e0003
+            name: Deposit iglzimar
+            attributes:
+            - id: 442f48a6-7fba-11ee-b90d-0242ac1e0003
+              name: hkexupse TRN
+              order: 0
+              metadata:
+                FK: true
+                PK: true
+              created_at: 2023-11-10 11:14:07.957185
+              updated_at: 2023-11-10 11:14:07.957185
+            - id: 442f9d24-7fba-11ee-b90d-0242ac1e0003
+              name: source gcmtnokc
+              order: 1
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:14:07.957185
+              updated_at: 2023-11-10 11:14:07.957185
+            - id: 442fec70-7fba-11ee-b90d-0242ac1e0003
+              name: jpgymixv location
+              order: 2
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:14:07.957185
+              updated_at: 2023-11-10 11:14:07.957185
+            createdAt: 2023-11-10 10:52:35.263000+00:00
+            updatedAt: 2023-11-10 11:14:10.208000+00:00
+            metadata:
+              links:
+              - id: e478bcba-e491-a829-40b2-8506c161cefb
+                name: okfejaef Deposit
+                level: level-link
+                linkedEntityType: conceptual
+          - id: 4218cf40-7fb7-11ee-bbeb-0242ac1e0003
+            name: Money Market Account pamqakmw
+            attributes: []
+            createdAt: 2023-11-10 10:52:35.263000+00:00
+            updatedAt: 2023-11-10 10:52:35.263000+00:00
+            metadata:
+              links:
+              - id: 10d9f54d-3b75-1fcb-401f-84fbcf1a3ac0
+                name: Money hbvllezl Market Account
+                level: level-link
+                linkedEntityType: conceptual
+          - id: 42335432-7fb7-11ee-bbeb-0242ac1e0003
+            name: swpiaqxy Payment
+            attributes:
+            - id: e7e9f7b6-7fba-11ee-9003-0242ac1e0003
+              name: TRN onjkbzwv
+              order: 0
+              metadata:
+                FK: true
+                PK: true
+              created_at: 2023-11-10 11:18:42.638621
+              updated_at: 2023-11-10 11:18:42.638621
+            - id: e7ea7236-7fba-11ee-9003-0242ac1e0003
+              name: gzyfogrg method
+              order: 1
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:18:42.638621
+              updated_at: 2023-11-10 11:18:42.638621
+            - id: e7ead56e-7fba-11ee-9003-0242ac1e0003
+              name: invoiceNumber ucuqnzej
+              order: 2
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:18:42.638621
+              updated_at: 2023-11-10 11:18:42.638621
+            - id: e7eb3dba-7fba-11ee-9003-0242ac1e0003
+              name: obfpyhav source
+              order: 3
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:18:42.638621
+              updated_at: 2023-11-10 11:18:42.638621
+            createdAt: 2023-11-10 10:52:35.263000+00:00
+            updatedAt: 2023-11-10 11:18:42.638000+00:00
+            metadata:
+              links:
+              - id: 3e605598-df20-17df-42a1-8e81ea661868
+                name: ubssgqum Payment
+                level: level-link
+                linkedEntityType: conceptual
+          - id: 42112808-7fb7-11ee-bbeb-0242ac1e0003
+            name: Savings fvzjlfuy Account
+            attributes: []
+            createdAt: 2023-11-10 10:52:35.263000+00:00
+            updatedAt: 2023-11-10 10:52:35.263000+00:00
+            metadata:
+              links:
+              - id: afc64ee4-6a63-7c5b-4edd-8301a795a111
+                name: Savings skfncoox Account
+                level: level-link
+                linkedEntityType: conceptual
+          - id: 867ba968-7fb8-11ee-baa2-0242ac1e0003
+            name: Transaction gqcpoqxh Type
+            attributes:
+            - id: 867e132e-7fb8-11ee-baa2-0242ac1e0003
+              name: tuntdplm typeName
+              order: 0
+              metadata:
+                FK: false
+                PK: true
+              created_at: 2023-11-10 11:01:40.195539
+              updated_at: 2023-11-10 11:01:40.195539
+            createdAt: 2023-11-10 11:01:40.195000+00:00
+            updatedAt: 2023-11-10 11:02:09.393000+00:00
+            metadata:
+              links: []
+          - id: 422fd2d0-7fb7-11ee-bbeb-0242ac1e0003
+            name: Transfer uibmwnkp
+            attributes:
+            - id: a359dc9c-7fba-11ee-a3bd-0242ac1e0003
+              name: mdwxpnzr TRN
+              order: 0
+              metadata:
+                FK: true
+                PK: true
+              created_at: 2023-11-10 11:16:47.612429
+              updated_at: 2023-11-10 11:16:47.612429
+            - id: a35a77d8-7fba-11ee-a3bd-0242ac1e0003
+              name: source jchsrjey
+              order: 1
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:16:47.612429
+              updated_at: 2023-11-10 11:16:47.612429
+            - id: a35ad188-7fba-11ee-a3bd-0242ac1e0003
+              name: aldypjxa destination
+              order: 2
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:16:47.612429
+              updated_at: 2023-11-10 11:16:47.612429
+            - id: a35b31c8-7fba-11ee-a3bd-0242ac1e0003
+              name: tudyrfmr reason
+              order: 3
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:16:47.612429
+              updated_at: 2023-11-10 11:16:47.612429
+            createdAt: 2023-11-10 10:52:35.263000+00:00
+            updatedAt: 2023-11-10 11:16:50.156000+00:00
+            metadata:
+              links:
+              - id: 3c547a0a-3d40-241d-4def-8b80f0fc59a5
+                name: qhmveupl Transfer
+                level: level-link
+                linkedEntityType: conceptual
+          - id: 422d3ade-7fb7-11ee-bbeb-0242ac1e0003
+            name: Withdrawal pvlwkzot
+            attributes:
+            - id: 07168f28-7fbb-11ee-8bba-0242ac1e0003
+              name: qklauzkl TRN
+              order: 0
+              metadata:
+                FK: true
+                PK: true
+              created_at: 2023-11-10 11:19:34.944061
+              updated_at: 2023-11-10 11:19:34.944061
+            - id: 071758fe-7fbb-11ee-8bba-0242ac1e0003
+              name: location gzzsmxtl
+              order: 1
+              metadata:
+                FK: false
+                PK: false
+              created_at: 2023-11-10 11:19:34.944061
+              updated_at: 2023-11-10 11:19:34.944061
+            createdAt: 2023-11-10 10:52:35.263000+00:00
+            updatedAt: 2023-11-10 11:19:34.944000+00:00
+            metadata:
+              links:
+              - id: 071289f8-3297-c968-4f7c-8ea1a5fbb502
+                name: zskonvym Withdrawal
+                level: level-link
+                linkedEntityType: conceptual
+          relationships:
+          - sourceEntity:
+              id: 421c65e2-7fb7-11ee-bbeb-0242ac1e0003
+              name: Bank atpnpuxf Customer
+              startType: many-mandatory
+            targetEntity:
+              id: 420b573e-7fb7-11ee-bbeb-0242ac1e0003
+              name: tiapikcq Bank Account
+              endType: many-mandatory
+            description: []
+          - sourceEntity:
+              id: 4227322e-7fb7-11ee-bbeb-0242ac1e0003
+              name: Bank Transaction yywbjyqu
+              startType: one
+            targetEntity:
+              id: 422a1aca-7fb7-11ee-bbeb-0242ac1e0003
+              name: Deposit gxmirevl
+              endType: one
+            description: []
+          - sourceEntity:
+              id: 420b573e-7fb7-11ee-bbeb-0242ac1e0003
+              name: Bank ymnivzgl Account
+              startType: one
+            targetEntity:
+              id: 4214efd8-7fb7-11ee-bbeb-0242ac1e0003
+              name: ldibjtnv Checking Account
+              endType: one
+            description: []
+          - sourceEntity:
+              id: 420b573e-7fb7-11ee-bbeb-0242ac1e0003
+              name: xcutfzeb Bank Account
+              startType: one
+            targetEntity:
+              id: 42112808-7fb7-11ee-bbeb-0242ac1e0003
+              name: xperlbrl Savings Account
+              endType: one
+            description: []
+          - sourceEntity:
+              id: 420b573e-7fb7-11ee-bbeb-0242ac1e0003
+              name: Bank Account kajbgkuz
+              startType: one
+            targetEntity:
+              id: 4218cf40-7fb7-11ee-bbeb-0242ac1e0003
+              name: Money Market Account zkcbhahv
+              endType: one
+            description: []
+          - sourceEntity:
+              id: 4227322e-7fb7-11ee-bbeb-0242ac1e0003
+              name: Bank oxqyvffe Transaction
+              startType: one
+            targetEntity:
+              id: 422fd2d0-7fb7-11ee-bbeb-0242ac1e0003
+              name: lnxbxqhz Transfer
+              endType: one
+            description: []
+          - sourceEntity:
+              id: 4227322e-7fb7-11ee-bbeb-0242ac1e0003
+              name: Bank qhrhtrot Transaction
+              startType: one
+            targetEntity:
+              id: 42335432-7fb7-11ee-bbeb-0242ac1e0003
+              name: Payment ogoanlvg
+              endType: one
+            description: []
+          - sourceEntity:
+              id: 4227322e-7fb7-11ee-bbeb-0242ac1e0003
+              name: Bank Transaction gnzbfjok
+              startType: one
+            targetEntity:
+              id: 422d3ade-7fb7-11ee-bbeb-0242ac1e0003
+              name: Withdrawal gwiwfoxu
+              endType: one
+            description: []
+          - sourceEntity:
+              id: 4227322e-7fb7-11ee-bbeb-0242ac1e0003
+              name: Bank iyseyxga Transaction
+              startType: many-optional
+            targetEntity:
+              id: 420b573e-7fb7-11ee-bbeb-0242ac1e0003
+              name: Bank Account cuhhqkwj
+              endType: one
+            description: []
+          - sourceEntity:
+              id: 4227322e-7fb7-11ee-bbeb-0242ac1e0003
+              name: Bank Transaction zzngtgqf
+              startType: many
+            targetEntity:
+              id: 867ba968-7fb8-11ee-baa2-0242ac1e0003
+              name: Transaction Type kekvkzrj
+              endType: one-mandatory
+            description: []
+    note: cfg-v9 kroxrmow
+  ellieai:
+    spec:
+      model:
+        modelId: 16719
+  consumable: false
+  shoppable: false
+  labels:
+  - rflrr
+  - edmusu
+  annotations:
+    owner-note: zljmksbesq
+- kind: observability
+  id: urn:dmb:cmp:finance:cashflow:0:observability
+  description: jfrfwpsa Observability API (v9)
+  useCaseTemplateId: urn:dmb:utm:observability-api:0.0.0
+  infrastructureTemplateId: urn:dmb:itm:workload-observability-no-name:1
+  fullyQualifiedName: Observability jqqjgtez API
+  name: tqfnywmx Observability (v9)
+  technology: AWS Lambda
+  version: 1.17.19
+  tags: []
+  dependsOn: []
+  specific:
+    swaggerLocation: observabilitySwagger.yaml
+    note: cfg-v9 pfvqkzwq
+  consumable: false
+  shoppable: false
+  labels:
+  - psamg
+  - nnoaqj
+  annotations:
+    owner-note: yiybhdleha
+- kind: storage
+  id: urn:dmb:cmp:finance:cashflow:0:snowflake-component
+  description: Internal DB vtcsfimh serving storage and processing for the gcuyndpg
+    data product (v9)
+  name: ombvbdkd Snowflake component (v9)
+  fullyQualifiedName: jhjodxet Snowflake internal engine
+  version: 0.15.20
+  infrastructureTemplateId: urn:dmb:itm:snowflake-storage-no-name:0
+  useCaseTemplateId: urn:dmb:utm:snowflake-storage-template:0.0.0
+  dependsOn: []
+  platform: Snowflake on AWS
+  technology: Snowflake
+  storageType: Database
+  tags: []
+  specific:
+    account: finance
+    database: cashflows
+    note: cfg-v9 eclzcfeq
+  consumable: false
+  shoppable: false
+  labels:
+  - gkvur
+  - xoiqwb
+  annotations:
+    owner-note: oulzwdqmhe
+metadata:
+  docNoise: gflwhdzvxzymbwps
+notes:
+- dkplpax
+- hkjgjioei

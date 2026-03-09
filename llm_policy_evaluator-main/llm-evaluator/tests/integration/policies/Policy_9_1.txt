@@ -1,0 +1,1 @@
+At the end of the Airflow DAG, publish the Data Product refreshed event on the shared event bus.

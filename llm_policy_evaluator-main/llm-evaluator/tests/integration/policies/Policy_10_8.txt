@@ -1,0 +1,1 @@
+If the schema contains PII fields, each such field must be tagged PII via FQN.

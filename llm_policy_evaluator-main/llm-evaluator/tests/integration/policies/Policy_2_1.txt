@@ -1,0 +1,15 @@
+Before performing any validation, extract and list all schema fields for each data contract in the descriptor.
+Each field MUST contain:
+- `name` (optional)
+- `dataType` (optional)
+- `description` (required and must be non-empty)
+- `constraint` (optional)
+
+Validation rules:
+1. If a `description` field is explicitly present, assume it is correctly formatted.
+2. Every schema field must contain a description field. If the key is missing, report an error.
+3. If a description is present but empty, return an error only if the JSON explicitly has `"description": ""`.
+4. Validate only on the extracted schema fields—DO NOT infer missing values or assume defaults.
+5. If description is explicitly present and non-empty, assume it is correctly formatted.
+
+If all required fields are present, return `satisfiesPolicy = true`. Otherwise, return `satisfiesPolicy = false` with missing fields listed.

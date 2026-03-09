@@ -1,0 +1,1 @@
+Biconditional requirement: the product is tagged GDPR iff there is at least one PII tag on columns.

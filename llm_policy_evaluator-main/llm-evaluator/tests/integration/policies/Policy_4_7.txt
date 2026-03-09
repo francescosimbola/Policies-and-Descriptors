@@ -1,0 +1,1 @@
+If PII exists in the data product, apply the GDPR tag.

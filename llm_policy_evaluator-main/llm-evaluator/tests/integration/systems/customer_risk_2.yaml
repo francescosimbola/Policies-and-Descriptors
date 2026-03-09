@@ -1,0 +1,325 @@
+dataProductOwnerDisplayName: Mario Rossi
+projectOwner: user:mario.rossi.italia.it
+projectOwnerDisplayName: Mario Rossi
+environment: development
+domain: finance-risk
+projectKind: system
+kind: dataproduct
+domainId: urn:dmb:dmn:financerisk
+id: urn:dmb:dp:finance-risk:customer-risk:0
+description: this represents bmnnberj the risk eerpdoam traits of uflkfgtf a ydnhzygy
+  customer
+devGroup: bigdata
+ownerGroup: mario.rossi_italia.it
+dataProductOwner: user:mario.rossi_italia.it
+email: mario.rossi+gqejy@italia.it
+version: 0.2.11-SNAPSHOT
+fullyQualifiedName: null
+name: zglkavrw qvjkrkdg Customer Risk
+informationSLA: null
+maturity: Strategic
+useCaseTemplateId: urn:dmb:utm:dataproduct-template:0.0.0
+infrastructureTemplateId: urn:dmb:itm:dataproduct-no-name:1
+billing: {}
+tags:
+- tagFQN: GDPR
+  source: Tag
+  labelType: Manual
+  state: Confirmed
+specific: {}
+business_attributes:
+  valueProposition: Keep Risk under control hsrlmvwo for each customer
+  okr: Decrease by 1% the overall RWA yfkeipcb
+  pricingType: offporfg Subscription
+  stakeholderRoles:
+  - CFO
+security_attributes:
+  visibility: Department tihglhyh
+  confidentiality: rocmdswu Restricted
+  gdpr: 'Yes'
+consumable: false
+shoppable: false
+taxonomy:
+  id: urn:dmb:taxonomy:data-mesh-taxonomy
+  name: fourdvyz data-mesh-taxonomy
+components:
+- kind: workload
+  id: urn:dmb:cmp:finance:customer-risk:0:deletion-workload
+  description: Procedure ofevaarz to mmpjvfka delete data according to ampieneb zbxwezii
+    the right to be forgotten
+  name: Data Deletion ysdtlymz Workload wxfzbcak
+  technology: DBT
+  platform: Azure
+  version: 0.1.3
+  infrastructureTemplateId: urn:dmb:itm:gdpr-tech-adapter:1
+  useCaseTemplateId: urn:dmb:utm:gdpr-workload-template:1
+  consumable: false
+  shoppable: false
+  specific: {}
+  dependsOn: []
+  tags: []
+  labels:
+  - tzczv
+  - zxyhce
+  annotations:
+    maint-note: xmtjgirjev
+- kind: outputport
+  id: urn:dmb:cmp:finance-risk:customer-risk:0:customer-features
+  description: lbtlexof Customer bxvekihl characteristics
+  name: msgwsyhn Customer xaexcmku Features
+  fullyQualifiedName: null
+  version: 0.2.7
+  infrastructureTemplateId: urn:dmb:itm:aws-dremio-no-name:1
+  useCaseTemplateId: urn:dmb:utm:aws-dremio-template:0.0.0
+  dependsOn: []
+  platform: Dremio Cloud
+  technology: Dremio
+  outputPortType: SQL
+  creationDate: null
+  startDate: null
+  processDescription: null
+  dataContract:
+    schema:
+    - name: bpkqqnjf Customer_Key
+      tags:
+      - tagFQN: GlobalAddressableIdentifier
+        labelType: Manual
+        source: Tag
+        state: Confirmed
+      dataType: string
+      constraint: PRIMARY_KEY
+    - name: laivmfsp First_Name
+      tags:
+      - tagFQN: PII
+        labelType: Manual
+        source: Tag
+        state: Confirmed
+      masking:
+        generatorType: Name
+        specific:
+          part: FirstName
+      dataType: string
+      constraint: NOT_NULL
+      description: customer's first name dyzpylcw
+    - name: Last_Name btlxwxjy
+      tags:
+      - tagFQN: PII
+        labelType: Manual
+        source: Tag
+        state: Confirmed
+      masking:
+        generatorType: Name
+        specific:
+          part: LastName
+      dataType: string
+      constraint: NOT_NULL
+      description: lhrrlenh customer's last name
+    - name: hpilqpkr Gender
+      tags:
+      - tagFQN: Sensitive
+        labelType: Manual
+        source: Tag
+        state: Confirmed
+      masking:
+        generatorType: Categorical
+        link: First_Name
+      dataType: string
+      constraint: NOT_NULL
+      description: eyvgsdbf customer's gender
+    - name: fsiwelig Email
+      tags:
+      - tagFQN: PII
+        labelType: Manual
+        source: Tag
+        state: Confirmed
+      masking:
+        generatorType: Email
+      dataType: string
+      constraint: NOT_NULL
+      description: nlcjbtnq email
+    - name: Marital_Status klxrorih
+      dataType: string
+      constraint: NOT_NULL
+      description: behznnip status
+    - name: Number_Of_Children ciafzony
+      dataType: number
+      masking:
+        generatorType: RandomInteger
+        specific:
+          minimum: 0
+          maximum: 3
+      constraint: NOT_NULL
+      description: number of mijcneax children
+    - name: aorytqal Annual_Income
+      dataType: number
+      constraint: NOT_NULL
+      description: annual income eeltnchv
+    - name: Occupation kdtvgvdb
+      dataType: string
+      constraint: NOT_NULL
+      description: uuzremqh occupation
+    - name: rmyzfils Largest_Bill_Amount
+      dataType: number
+      constraint: NOT_NULL
+      description: largest tztuwgdh bill amount
+    - name: ximfdzhf Store_Membership_Card
+      dataType: string
+      masking:
+        generatorType: TextMask
+      constraint: NOT_NULL
+      description: store card fwswnvum
+    - name: Birth_Date khnxacck
+      tags:
+      - tagFQN: Sensitive
+        labelType: Manual
+        source: Tag
+        state: Confirmed
+      dataType: date
+      masking:
+        generatorType: RandomTimestamp
+        specific:
+          minimum: 01-01-1980
+          maximum: 31-12-2010
+      constraint: null
+      description: yytuwguw birth date
+    - name: Customer_Since ewoudgge
+      dataType: date
+      constraint: null
+      description: customer lrtbdxnl since
+    - name: Last_Transaction eykczfyo
+      dataType: date
+      constraint: null
+      description: last transaction vzfysily
+    - name: Ext_Demographic_Data yjmqiccd
+      dataType: string
+      constraint: null
+      description: additional data kgkoulzj
+    termsAndConditions: null
+    endpoint: null
+    SLA:
+      intervalOfChange: null
+      timeliness: null
+      upTime: null
+  dataSharingAgreements:
+    purpose: null
+    billing: null
+    security: null
+    intendedUsage: null
+    limitations: null
+    lifeCycle: null
+    confidentiality: null
+  tags: []
+  sampleData: null
+  semanticLinking: []
+  specific:
+    sql: '> SELECT c.company_name as name, ''company'' as type from companies c union
+      all select p.name as name, ''person'' as type from persons p'
+    dependsOn: []
+    reflectionDefinitions: []
+    supportVds: []
+    supportPds: []
+    format: null
+  consumable: true
+  shoppable: true
+  labels:
+  - kmfbh
+  - xulihl
+  annotations:
+    maint-note: bukdnpjekq
+- kind: outputport
+  id: urn:dmb:cmp:finance-risk:customer-risk:0:customer-risk-port
+  description: All the rmzqcgvw most important risk traits vvzyqnyf of a customer
+    xaralyns tawsdpzr
+  name: suxzgmxt Customer rlqkwqzy Risk Port
+  fullyQualifiedName: Customer Risk Port xcakwrgr
+  version: 0.7.1
+  infrastructureTemplateId: urn:dmb:itm:aws-dremio-no-name:1
+  useCaseTemplateId: urn:dmb:utm:aws-dremio-template:0.0.0
+  dependsOn: []
+  platform: Dremio Cloud
+  technology: Dremio
+  outputPortType: SQL
+  creationDate: null
+  startDate: null
+  processDescription: Starting aevtxuox from credit history, we consolidate standardized
+    xnvbfvzp risk features
+  dataContract:
+    schema:
+    - name: nzedpmyt customerId
+      dataType: string
+      constraint: NOT_NULL
+      tags: null
+    - name: reference_date weonuqnc
+      dataType: date
+      constraint: NOT_NULL
+      tags: null
+    - name: rfvnbefp number_of_loans
+      dataType: number
+      constraint: NOT_NULL
+      tags: null
+    - name: ndvwqjjw debt_amount
+      dataType: number
+      constraint: NOT_NULL
+      tags: null
+    - name: net_income yqthfary
+      dataType: number
+      constraint: NOT_NULL
+      tags: null
+    - name: number_of_90latepayments ifdaajub
+      dataType: number
+      constraint: NOT_NULL
+      tags: null
+    - name: btymrnrd number_of_60latepayments
+      dataType: number
+      constraint: NOT_NULL
+      tags: null
+    - name: juqlcghv age
+      dataType: number
+      constraint: NOT_NULL
+      tags: null
+    - name: ybowhbgh mybank_riskscore
+      dataType: number
+      constraint: NOT_NULL
+    - name: bbnqagyw last_update
+      dataType: date
+      constraint: null
+      tags: null
+    termsAndConditions: It can be used for production purposes
+    endpoint: https://customerrisk
+    SLA:
+      intervalOfChange: 1 day
+      timeliness: 1 day
+      upTime: 99%
+  dataSharingAgreements:
+    purpose: avspnekg offical risk indicators for customers.
+    billing: null
+    security: null
+    intendedUsage: it can be used for ejjcxpri underwriting and xptqwxzi KYV processes.
+      This information should never be comunicated to the customer itself
+    limitations: null
+    lifeCycle: data is calculated monthly vxqbvmlo and there are ihqyhrrw not retention
+      policies applied
+    confidentiality: null
+  tags: []
+  sampleData: null
+  semanticLinking: []
+  specific:
+    sql: '> SELECT c.company_name as name, ''company'' as type from companies c union
+      all select p.name as name, ''person'' as type from persons p'
+    dependsOn: []
+    reflectionDefinitions: []
+    supportVds: []
+    supportPds: []
+    format: null
+  consumable: true
+  shoppable: true
+  labels:
+  - zgcam
+  - ymjegs
+  annotations:
+    maint-note: zlybjsikjd
+metadata:
+  noise: elrffcnzcnmwjbqp
+notes:
+- dzkppqp
+- dxhlcjbvg

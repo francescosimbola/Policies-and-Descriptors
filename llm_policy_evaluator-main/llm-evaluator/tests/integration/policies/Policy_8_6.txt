@@ -1,0 +1,1 @@
+The orchestration layer must be Airflow; each ETL that updates contracts ends by invoking data contract guardian.

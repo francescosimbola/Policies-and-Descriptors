@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ template "llmevaluator.name" . }}
+{{- include "llmevaluator.labels" . | nindent 4 }}
+  name: {{ template "llmevaluator.fullname" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "llmevaluator.name" . }}
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: {{ template "llmevaluator.name" . }}
+{{- include "llmevaluator.labels" . | nindent 8 }}
+    spec:
+      automountServiceAccountToken: false
+      {{- if .Values.dockerRegistrySecretName }}
+      imagePullSecrets:
+        - name: {{ .Values.dockerRegistrySecretName }}
+      {{- end}}
+      volumes:
+        - name: app-config
+          configMap:
+            name: {{ template "llmevaluator.name" . }}-config
+            defaultMode: 420
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.image.registry }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8091
+              protocol: TCP
+          {{- if .Values.securityContext }}
+          securityContext: {{- toYaml .Values.securityContext | nindent 12 }}
+          {{- end }}
+          {{- if .Values.readinessProbe }}
+          readinessProbe: {{- toYaml .Values.readinessProbe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.livenessProbe }}
+          livenessProbe: {{- toYaml .Values.livenessProbe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.resources }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}
+          {{- end }}
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            {{- if .Values.extraEnvVars }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
+            {{- end }}
+          volumeMounts:
+            - name: app-config
+              mountPath: /app/config

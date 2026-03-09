@@ -1,0 +1,1 @@
+Ensure an SLA exists in at least one of the data contracts.

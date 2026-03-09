@@ -1,0 +1,1 @@
+At minimum, include a `businessTerms` entry among column tags, semantically consistent with domain and product; provide list and quantity in suggestions.
