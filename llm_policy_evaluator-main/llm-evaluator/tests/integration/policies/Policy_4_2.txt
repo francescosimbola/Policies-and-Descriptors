@@ -1,1 +1,0 @@
-If the data product contains PII, it must carry the GDPR tag.

@@ -1,1 +1,0 @@
-The policy is satisfied if an Airflow component posts the Data Product refreshed event at DAG end.

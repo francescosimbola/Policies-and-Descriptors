@@ -1,1 +1,0 @@
-The solution must contain three or more implemented data quality controls developed with Great Expectations.

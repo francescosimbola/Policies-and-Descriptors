@@ -1,1 +1,0 @@
-Consistency check: GDPR present ↔ at least one column tagged PII.

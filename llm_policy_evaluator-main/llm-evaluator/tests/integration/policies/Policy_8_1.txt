@@ -1,1 +1,0 @@
-The data product must use Airflow for orchestration and, after each ETL that refreshes data contracts, invoke the data contract guardian routine.

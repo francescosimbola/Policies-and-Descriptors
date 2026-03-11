@@ -1,1 +1,0 @@
-The descriptor is compliant when ≥1 contract specifies an SLA section.

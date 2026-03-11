@@ -1,1 +1,0 @@
-Presence of the GDPR tag mandates an implemented deletion/erase procedure aligned with the right to be forgotten.

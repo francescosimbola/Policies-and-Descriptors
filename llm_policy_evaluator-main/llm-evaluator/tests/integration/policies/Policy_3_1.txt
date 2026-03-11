@@ -1,1 +1,0 @@
-Column tags must contain at least one `businessTerms` coherent with the domain and the product’s purpose; in suggestions, list all terms found and their count.

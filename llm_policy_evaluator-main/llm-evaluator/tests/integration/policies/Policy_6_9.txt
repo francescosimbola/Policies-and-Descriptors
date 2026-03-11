@@ -1,1 +1,0 @@
-GDPR-tagged products must provide a deletion workflow for the right to be forgotten.

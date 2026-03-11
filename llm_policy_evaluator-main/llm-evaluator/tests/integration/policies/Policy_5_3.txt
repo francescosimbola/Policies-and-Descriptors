@@ -1,1 +1,0 @@
-Condition: GDPR implies ≥1 PII-tagged column; any PII-tagged column implies GDPR at product level.

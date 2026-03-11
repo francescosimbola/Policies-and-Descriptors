@@ -1,1 +1,0 @@
-Every schema field that represents PII must carry a tag whose FQN = PII.

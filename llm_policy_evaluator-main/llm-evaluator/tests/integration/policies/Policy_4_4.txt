@@ -1,1 +1,0 @@
-Products that embed PII must bear the GDPR tag.

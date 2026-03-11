@@ -1,1 +1,0 @@
-Only data products with three or more implemented Great Expectations controls are compliant.

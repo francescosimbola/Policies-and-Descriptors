@@ -1,1 +1,0 @@
-Where GDPR applies, implement a deletion mechanism compliant with the right to be forgotten.

@@ -1,1 +1,0 @@
-Use Airflow as orchestrator; after every contract-refresh ETL, trigger the data contract guardian routine.

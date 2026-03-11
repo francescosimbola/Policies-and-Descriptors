@@ -1,1 +1,0 @@
-A final Airflow action must post the Data Product refreshed event on the common event bus at DAG completion.

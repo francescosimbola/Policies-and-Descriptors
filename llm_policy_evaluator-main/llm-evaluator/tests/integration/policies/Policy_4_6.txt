@@ -1,1 +1,0 @@
-The product must include the GDPR tag whenever PII data exists.

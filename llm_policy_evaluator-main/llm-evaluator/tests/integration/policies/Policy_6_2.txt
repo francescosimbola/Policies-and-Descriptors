@@ -1,1 +1,0 @@
-If the product carries a GDPR tag, it must provide a deletion routine implementing the right to be forgotten.

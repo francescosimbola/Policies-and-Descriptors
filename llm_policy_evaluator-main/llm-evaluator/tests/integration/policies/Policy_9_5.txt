@@ -1,1 +1,0 @@
-The pipeline must include an Airflow step to publish Data Product refreshed on the shared event bus at DAG end.

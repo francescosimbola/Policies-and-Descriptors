@@ -1,1 +1,0 @@
-Enforce ≥3 Great Expectations validations implemented within the data product.

@@ -1,1 +1,0 @@
-Fields encoding PII must be annotated using a tag having FQN = PII.
